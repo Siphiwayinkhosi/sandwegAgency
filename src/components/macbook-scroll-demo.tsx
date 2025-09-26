@@ -3,10 +3,10 @@ import { MacbookScroll } from "@/components/ui/macbook-scroll";
 
 export default function MacbookScrollDemo() {
   return (
-  <div className="w-full overflow-hidden bg-background bg-black">
+  <div className="w-full overflow-hidden bg-black mt-0 md:-mt-8 pt-4 md:pt-0">
   <MacbookScroll
     title={
-      <span className="text-white text-5xl">
+      <span className="text-white text-4xl sm:text-5xl font-bold">
         AI driven websites and marketing tools <br /> that grow your
         business & simplify your life.
       </span>
