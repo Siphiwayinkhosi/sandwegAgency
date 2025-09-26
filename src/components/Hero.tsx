@@ -1,25 +1,18 @@
-// src/components/Hero.tsx
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
-const Hero: React.FC = () => {
-  const [language, setLanguage] = useState<"EN" | "DE">("EN");
+const Hero = () => {
+  const [language, setLanguage] = useState("EN");
 
   // Refs for layout
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const leftColRef = useRef<HTMLDivElement | null>(null);
-  const line1Ref = useRef<HTMLDivElement | null>(null);
-  const line2Ref = useRef<HTMLDivElement | null>(null);
-  const line3Ref = useRef<HTMLDivElement | null>(null);
+  const containerRef = useRef(null);
+  const leftColRef = useRef(null);
+  const line1Ref = useRef(null);
+  const line2Ref = useRef(null);
+  const line3Ref = useRef(null);
 
-  const runMeasureRef = useRef<() => void>(() => {});
-  const [pos, setPos] = useState<{
-    left: number;
-    top: number;
-    height: number;
-    centers: number[];
-    measured: boolean;
-  }>({
+  const runMeasureRef = useRef(() => {});
+  const [pos, setPos] = useState({
     left: 60,
     top: 0,
     height: 0,
@@ -43,7 +36,6 @@ const Hero: React.FC = () => {
 
       const centers = [line1Ref, line2Ref, line3Ref].map((r) => {
         const el = r.current;
-        if (!el) return 0;
         const rect = el.getBoundingClientRect();
         const fontSize = parseFloat(window.getComputedStyle(el).fontSize);
         return rect.top - containerRect.top + rect.height / 2 - fontSize * 0.05;
@@ -63,8 +55,8 @@ const Hero: React.FC = () => {
     };
 
     const runMeasure = () => {
-      if ((document as any).fonts && (document as any).fonts.ready) {
-        (document as any).fonts.ready.then(() => {
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(() => {
           requestAnimationFrame(() => {
             requestAnimationFrame(measure);
           });
@@ -76,7 +68,7 @@ const Hero: React.FC = () => {
       }
     };
 
-    runMeasureRef.current = runMeasure;
+    runMeasureRef.current = runMeasure; // make available outside
     runMeasure();
 
     const resizeObserver = new ResizeObserver(runMeasure);
@@ -110,6 +102,7 @@ const Hero: React.FC = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.9 }}
         >
+          {/* smaller logo on mobile */}
           <img src="/logo.png" alt="Logo" className="w-20 sm:w-32 md:w-40" />
           <div className="flex flex-col leading-snug">
             <span className="uppercase text-sm sm:text-base md:text-lg font-semibold tracking-wider">
@@ -183,7 +176,7 @@ const Hero: React.FC = () => {
           </motion.div>
         </div>
 
-        {/* Line */}
+        {/* Line - Uses -translate-x-1/2 for perfect centering on pos.left */}
         <motion.div
           className="absolute w-[2px] bg-orange-500 -translate-x-1/2 origin-top"
           style={{
@@ -198,25 +191,28 @@ const Hero: React.FC = () => {
           transition={{ duration: 1.1, ease: "easeInOut" }}
         />
 
-        {/* Dots */}
+        {/* Dots - Uses -translate-x-1/2 for perfect centering on pos.left */}
         {pos.centers.map((c, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-orange-500 -translate-x-1/2 -translate-y-1/2"
-            style={{
-              left: `${pos.left}px`,
-              top: `${c}px`,
-            }}
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{
-              delay: 1.1 + i * 0.28,
-              type: "spring",
-              stiffness: 400,
-              damping: 22,
-            }}
-          />
-        ))}
+  <motion.div
+    key={i}
+    className="absolute flex items-center justify-center"
+    style={{
+      left: `${pos.left}px`,
+      top: `${c}px`,
+    }}
+    initial={{ scale: 0, opacity: 0 }}
+    animate={{ scale: 1, opacity: 1 }}
+    transition={{
+      delay: 1.1 + i * 0.28,
+      type: "spring",
+      stiffness: 400,
+      damping: 22,
+    }}
+  >
+    <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-orange-500 -translate-x-1/2 -translate-y-1/2" />
+  </motion.div>
+))}
+
       </div>
     </section>
   );

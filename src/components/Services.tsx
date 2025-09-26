@@ -1,24 +1,5 @@
 import React, { useState } from "react";
-import {
-  Box,
-  Settings,
-  Sparkles,
-  Headphones,
-  Bot,
-  Calendar,
-  FormInput,
-  Zap,
-  Database,
-  Cpu,
-  Layout,
-  Smartphone,
-  Shield,
-  TrendingUp,
-  Search,
-  BarChart3,
-  PenTool,
-  BookOpen,
-} from "lucide-react";
+import { Box, Settings, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Services() {
@@ -30,12 +11,9 @@ export default function Services() {
       icon: <Box className="h-10 w-10 text-orange-500" />,
       title: "AI Integrations",
       shortLines: [
-        { text: "Virtual Receptionists", icon: Headphones },
-        { text: "Chatbots", icon: Bot },
-        { text: "AI Scheduling", icon: Calendar },
-        { text: "Lead Qualification Forms", icon: FormInput },
-        { text: "24/7 Availability", icon: Zap },
-        { text: "CRM Integration", icon: Database },
+        { text: "Virtual Receptionists" },
+        { text: "Chatbots" },
+        { text: "AI Scheduling" },
       ],
       fullContent: (
         <div className="space-y-6 text-neutral-200">
@@ -113,20 +91,16 @@ export default function Services() {
       icon: <Settings className="h-10 w-10 text-orange-500" />,
       title: "Web Design",
       shortLines: [
-        { text: "Scalable Web Design", icon: Layout },
-        { text: "Smart Websites", icon: Cpu },
-        { text: "Mobile Responsive", icon: Smartphone },
-        { text: "Fast & Secure Hosting", icon: Shield },
-        { text: "Conversion-Optimized Layouts", icon: TrendingUp },
+        { text: "Scalable Web Design" },
+        { text: "Smart Websites" },
+        { text: "Mobile Responsive" },
       ],
       fullContent: (
         <div className="space-y-6 text-neutral-200">
           <h1 className="text-3xl md:text-4xl font-bold text-white">
             Modern Web Design That Converts
           </h1>
-          <p>
-            Your website is your digital storefront—make it unforgettable.
-          </p>
+          <p>Your website is your digital storefront—make it unforgettable.</p>
 
           <div>
             <h2 className="text-xl font-semibold text-white mb-2">
@@ -134,8 +108,8 @@ export default function Services() {
             </h2>
             <ul className="list-disc list-inside space-y-1">
               <li>Custom responsive design</li>
-              <li>Domain &amp; hosting (1 year free)</li>
-              <li>Optimized for speed &amp; mobile</li>
+              <li>Domain & hosting (1 year free)</li>
+              <li>Optimized for speed & mobile</li>
               <li>Future-ready with integrations (chat, AI, booking)</li>
             </ul>
           </div>
@@ -152,10 +126,10 @@ export default function Services() {
           <div>
             <h2 className="text-xl font-semibold text-white mb-2">Process</h2>
             <ol className="list-decimal list-inside space-y-1">
-              <li>Discovery &amp; strategy</li>
+              <li>Discovery & strategy</li>
               <li>Design mockups</li>
-              <li>Development &amp; testing</li>
-              <li>Launch &amp; support</li>
+              <li>Development & testing</li>
+              <li>Launch & support</li>
             </ol>
           </div>
 
@@ -164,7 +138,7 @@ export default function Services() {
             whileTap={{ scale: 0.95 }}
             className="px-6 py-3 bg-orange-500 text-white rounded-full font-semibold mt-4"
           >
-            Let's get you started with a new website
+            Let&apos;s get you started with a new website
           </motion.button>
         </div>
       ),
@@ -175,12 +149,9 @@ export default function Services() {
       icon: <Sparkles className="h-10 w-10 text-orange-500" />,
       title: "SEO",
       shortLines: [
-        { text: "Search Engine Optimization", icon: Search },
-        { text: "Increased Visibility", icon: TrendingUp },
-        { text: "Higher Google Ranking", icon: BarChart3 },
-        { text: "Keyword Strategy", icon: PenTool },
-        { text: "Content Optimization", icon: BookOpen },
-        { text: "Analytics & Tracking", icon: BarChart3 },
+        { text: "Search Engine Optimization" },
+        { text: "Increased Visibility" },
+        { text: "Higher Google Ranking" },
       ],
       fullContent: (
         <div className="space-y-6 text-neutral-200">
@@ -262,19 +233,6 @@ export default function Services() {
         Our Services
       </h2>
 
-      {/* Background overlay when expanded */}
-      <AnimatePresence>
-        {activeIndex !== null && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.6 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.4 }}
-            className="fixed inset-0 bg-black z-0"
-          />
-        )}
-      </AnimatePresence>
-
       <div className="flex flex-col md:flex-row justify-center gap-8 px-6 relative z-10">
         {cards.map((card, i) => (
           <GridItem
@@ -282,10 +240,7 @@ export default function Services() {
             {...card}
             index={i}
             expanded={activeIndex === i}
-            activeIndex={activeIndex}
-            onClick={() =>
-              setActiveIndex(activeIndex === i ? null : i)
-            }
+            onClick={() => setActiveIndex(activeIndex === i ? null : i)}
           />
         ))}
       </div>
@@ -293,31 +248,9 @@ export default function Services() {
   );
 }
 
-const GridItem = ({
-  icon,
-  title,
-  shortLines,
-  fullContent,
-  expanded,
-  activeIndex,
-  index,
-  onClick,
-}) => {
+const GridItem = ({ icon, title, shortLines, fullContent, expanded, onClick }) => {
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const [hover, setHover] = useState(false);
-
-  // Slide away non-active cards
-  let motionProps = {};
-  if (activeIndex !== null && activeIndex !== index) {
-    motionProps = {
-      animate: {
-        opacity: 0,
-        x: index < activeIndex ? -200 : 200,
-        scale: 0.95,
-      },
-      transition: { duration: 0.6, ease: "easeInOut" },
-    };
-  }
 
   return (
     <motion.div
@@ -336,7 +269,6 @@ const GridItem = ({
       }}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      {...motionProps}
     >
       {/* Glow effect */}
       <motion.div
@@ -370,32 +302,22 @@ const GridItem = ({
           </h3>
         </div>
 
-        <AnimatePresence mode="wait">
-          {!expanded ? (
-            <motion.ul
-              key="short"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="space-y-3 text-neutral-300"
-            >
-              {shortLines?.map((item, idx) => {
-                const Icon = item.icon;
-                return (
-                  <li key={idx} className="flex items-center gap-2">
-                    <Icon className="h-5 w-5 text-orange-500" />
-                    <span>{item.text}</span>
-                  </li>
-                );
-              })}
-            </motion.ul>
-          ) : (
+        {/* Short list always visible */}
+        <motion.ul layout className="space-y-3 text-neutral-300 mb-6">
+          {shortLines?.map((item, idx) => (
+            <li key={idx}>{item.text}</li>
+          ))}
+        </motion.ul>
+
+        {/* Expanded section */}
+        <AnimatePresence>
+          {expanded && (
             <motion.div
               key="expanded"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 30 }}
-              transition={{ duration: 0.6, ease: "easeOut", staggerChildren: 0.1 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
               className="space-y-6"
             >
               {fullContent}

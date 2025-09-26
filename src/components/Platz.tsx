@@ -6,7 +6,7 @@ const Platz = () => {
   return (
     <section className="w-full bg-black text-center text-white py-10 font-raleway">
       {/* Top text */}
-      <h2 className="text-xl md:text-3xl font-semibold mb-6">
+      <h2 className="text-xl md:text-5xl font-semibold mb-6">
         Besuch uns im Sony Center am Potsdamer Platz in Berlin
       </h2>
 
