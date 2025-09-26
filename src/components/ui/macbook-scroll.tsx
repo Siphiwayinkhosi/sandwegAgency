@@ -66,10 +66,11 @@ export const MacbookScroll = ({
   const textOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
 
   return (
-    <div
-      ref={ref}
-      className="flex min-h-[200vh] shrink-0 scale-[0.35] transform flex-col items-center justify-start py-0 [perspective:800px] sm:scale-50 md:scale-100 md:py-80"
-    >
+ <div
+  ref={ref}
+  className="flex h-[90vh]md:min-h-[200vh] shrink-0 scale-[0.35] transform flex-col items-center justify-center md:justify-start [perspective:800px] sm:scale-50 md:scale-100 md:py-80"
+>
+
       <motion.h2
         style={{
           translateY: textTransform,
