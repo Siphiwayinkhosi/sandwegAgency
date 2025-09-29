@@ -3,23 +3,23 @@ import { MacbookScroll } from "@/components/ui/macbook-scroll";
 
 export default function MacbookScrollDemo() {
   return (
-  <div className="w-full overflow-hidden bg-black mt-0 md:-mt-8 pt-4 md:pt-0">
-  <MacbookScroll
-    title={
-      <span className="text-white text-4xl sm:text-5xl font-bold">
-        AI driven websites and marketing tools <br /> that grow your
-        business & simplify your life.
-      </span>
-        }
-        badge={
-          <a href="https://peerlist.io/manuarora">
-            <Badge className="h-10 w-10 -rotate-12 transform" />
-          </a>
-        }
-        src="/video.mp4"   // ✅ your video in public/video.mp4
-        showGradient={false}
-      />
-    </div>
+    <section className="relative w-full bg-black overflow-hidden min-h-screen">
+      <div className="w-full">
+        <MacbookScroll
+          title={
+            <span className="text-white text-4xl sm:text-5xl font-semibold leading-snug">
+              AI websites & tools <br /> that grow your business.
+            </span>
+          }
+        
+          src="/video.mp4"
+          showGradient={false}
+        />
+      </div>
+
+      {/* ✅ Tight, aligned scroll spacer */}
+      <div className="h-[60vh] md:h-[35vh]" />
+    </section>
   );
 }
 
@@ -34,7 +34,10 @@ const Badge = ({ className }: { className?: string }) => {
       xmlns="http://www.w3.org/2000/svg"
       className={className}
     >
-      <path d="M56 28C56 43.464 43.464 56 28 56C12.536 56 0 43.464 0 28C0 12.536 12.536 0 28 0C43.464 0 56 12.536 56 28Z" fill="#00AA45" />
+      <path
+        d="M56 28C56 43.464 43.464 56 28 56C12.536 56 0 43.464 0 28C0 12.536 12.536 0 28 0C43.464 0 56 12.536 56 28Z"
+        fill="#00AA45"
+      />
       <path
         fillRule="evenodd"
         clipRule="evenodd"

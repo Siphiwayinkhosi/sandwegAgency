@@ -4,6 +4,8 @@ import Platz from "@/components/Platz";
 import Services from "@/components/Services";
 import Footer from "@/components/Footer";   // ✅ fixed import
 import Faq from "@/components/Faq";
+import Contact from "@/components/Contact";
+
 
 const Index = () => {
   return (
@@ -13,6 +15,7 @@ const Index = () => {
       <Services />
       <Platz />
       <Faq/>
+      <Contact/>
       <Footer />   {/* ✅ now using your Footer.tsx */}
     </div>
   );

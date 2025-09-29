@@ -35,20 +35,23 @@ const Footer: React.FC = () => {
     >
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10 items-center">
         {/* Brand + Logo */}
-        <motion.div
-          variants={itemVariants}
-          className="flex items-center justify-center md:justify-start gap-4"
-        >
-          <img src="/logo.png" alt="Sandweg Logo" className="w-16 md:w-20" />
-          <div className="text-center md:text-left">
-            <h3 className="text-2xl font-bold text-gray-400 tracking-wide">
-              Sandweg
-            </h3>
-            <p className="text-sm text-gray-400">
-              Branding & Marketing Agency
-            </p>
-          </div>
-        </motion.div>
+   <motion.div
+  variants={itemVariants}
+  className="flex flex-col md:flex-row items-center md:items-center justify-center md:justify-start gap-3 md:gap-4 text-center md:text-left"
+>
+  <img src="/logo.png" alt="Sandweg Logo" className="w-20 h-20" />
+
+  <div className="flex flex-col items-center md:items-start">
+    <h3 className="text-2xl font-bold text-white tracking-wide">
+      Sandweg
+    </h3>
+    <p className="text-sm text-white">
+      Branding & Marketing Agency
+    </p>
+  </div>
+</motion.div>
+
+
 
         {/* Navigation */}
         <motion.ul
@@ -94,7 +97,7 @@ const Footer: React.FC = () => {
       {/* Divider + Copyright */}
       <motion.div
         variants={itemVariants}
-        className="border-t border-gray-700 mt-8 pt-6 text-center text-xs text-gray-500"
+        className="border-t border-gray-700 mt-8 pt-6 text-center text-sm text-gray-500"
       >
         © {new Date().getFullYear()} Sandweg. All rights reserved.
       </motion.div>

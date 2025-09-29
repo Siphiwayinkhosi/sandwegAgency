@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Settings, Sparkles } from "lucide-react";
+import { Box, Settings, Sparkles, ChevronDown, ChevronUp } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Services() {
@@ -118,9 +118,7 @@ export default function Services() {
             <h2 className="text-xl font-semibold text-white mb-2">
               Portfolio / Showcase
             </h2>
-            <div className="bg-gray-800/40 rounded-lg p-6 text-center text-sm text-gray-400">
-              [ Showcase of past projects / Placeholder images ]
-            </div>
+           
           </div>
 
           <div>
@@ -199,9 +197,7 @@ export default function Services() {
             <p className="italic text-orange-400">
               “Clients typically see ranking improvements in 3–6 months.”
             </p>
-            <div className="bg-gray-800/40 rounded-lg p-6 text-center text-sm text-gray-400">
-              [ Before / After Graph or Image Placeholder ]
-            </div>
+           
           </div>
 
           <div>
@@ -255,8 +251,7 @@ const GridItem = ({ icon, title, shortLines, fullContent, expanded, onClick }) =
   return (
     <motion.div
       layout
-      onClick={onClick}
-      className={`relative rounded-3xl bg-black p-[2px] overflow-hidden cursor-pointer flex-1 transition-all duration-500 ${
+      className={`relative rounded-3xl bg-black p-[2px] overflow-hidden flex-1 transition-all duration-500 ${
         expanded ? "max-w-[800px]" : "max-w-[500px]"
       }`}
       initial={{ opacity: 0, y: 50 }}
@@ -280,26 +275,35 @@ const GridItem = ({ icon, title, shortLines, fullContent, expanded, onClick }) =
         transition={{ type: "spring", stiffness: 80, damping: 30 }}
         className="pointer-events-none absolute h-[600px] w-[600px] rounded-full bg-orange-500/90 blur-2xl"
       />
-      <motion.div
-        animate={{
-          opacity: hover || expanded ? 0.6 : 0,
-          x: pos.x - 350,
-          y: pos.y - 350,
-        }}
-        transition={{ type: "spring", stiffness: 70, damping: 25 }}
-        className="pointer-events-none absolute h-[800px] w-[800px] rounded-full bg-orange-400/40 blur-3xl"
-      />
 
       {/* Card content */}
       <motion.div
         layout
         className="relative h-full rounded-3xl border border-gray-800 bg-neutral-900/95 px-8 py-12 flex flex-col shadow-lg"
       >
-        <div className="flex items-center gap-4 mb-6">
-          {icon}
-          <h3 className="text-2xl md:text-3xl font-semibold text-white">
-            {title}
-          </h3>
+        {/* Header row with icon, title, and dropdown button */}
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-4">
+            {icon}
+            <h3 className="text-2xl md:text-3xl font-semibold text-white">
+              {title}
+            </h3>
+          </div>
+
+         {/* Dropdown toggle button */}
+{/* Dropdown toggle button */}
+<button
+  onClick={onClick}
+  className="group p-2 rounded-full border border-gray-700 hover:bg-orange-500 transition"
+>
+  {expanded ? (
+    <ChevronUp size={20} className="text-orange-500 group-hover:text-white" />
+  ) : (
+    <ChevronDown size={20} className="text-orange-500 group-hover:text-white" />
+  )}
+</button>
+
+
         </div>
 
         {/* Short list always visible */}

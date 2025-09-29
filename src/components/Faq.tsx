@@ -153,64 +153,69 @@ const Faq = () => {
     <section className="bg-black text-white font-raleway py-20 px-4 sm:px-10">
       {/* Heading */}
       <h2 className="text-4xl sm:text-5xl font-bold text-center mb-12 text-white">
-        Extended FAQ – Sandweg Marketing
+       Everything You Need to Know
       </h2>
 
-      {/* Category Tabs */}
-      <div className="flex flex-wrap justify-center gap-3 mb-12">
-        {faqs.map((f) => (
-          <button
-            key={f.category}
-            onClick={() => setActiveCategory(f.category)}
-            className={`px-4 py-2 rounded-full border transition ${
-              activeCategory === f.category
-                ? "bg-orange-500 border-orange-500 text-black font-semibold"
-                : "border-gray-600 hover:border-orange-400 hover:text-orange-400"
-            }`}
-          >
-            {f.category}
-          </button>
-        ))}
-      </div>
+  {/* Shared container for tabs + boxes */}
+<div className="max-w-7xl mx-auto px-4">
+  {/* Category Tabs */}
+  <div className="flex flex-wrap justify-center gap-3 mb-12">
+    {faqs.map((f) => (
+      <button
+        key={f.category}
+        onClick={() => setActiveCategory(f.category)}
+        className={`px-4 py-2 rounded-full border transition ${
+          activeCategory === f.category
+            ? "border-orange-500 text-orange-500 font-semibold"
+            : "border-gray-600 text-white hover:border-orange-400 hover:text-orange-400"
+        }`}
+      >
+        {f.category}
+      </button>
+    ))}
+  </div>
 
-      {/* Accordion for Selected Category */}
-      <div className="max-w-3xl mx-auto space-y-4">
-        {currentFaqs?.items.map((item, idx) => {
-          const id = `${activeCategory}-${idx}`;
-          const isOpen = open === id;
-          return (
-            <div
-              key={id}
-              className="border border-gray-700 rounded-lg overflow-hidden"
-            >
-              <button
-                onClick={() => setOpen(isOpen ? null : id)}
-                className="w-full flex justify-between items-center px-4 py-3 text-left hover:bg-gray-900 transition"
+  {/* Accordion for Selected Category */}
+  <div className="space-y-4">
+    {currentFaqs?.items.map((item, idx) => {
+      const id = `${activeCategory}-${idx}`;
+      const isOpen = open === id;
+      return (
+        <div
+          key={id}
+          className="border border-gray-700 rounded-lg overflow-hidden"
+        >
+          <button
+            onClick={() => setOpen(isOpen ? null : id)}
+            className="w-full flex justify-between items-center px-4 py-3 text-left hover:bg-gray-900 transition"
+          >
+            <span>{item.q}</span>
+            <ChevronDown
+              className={`h-5 w-5 transform transition-transform ${
+                isOpen ? "rotate-180 text-orange-500" : "text-gray-400"
+              }`}
+            />
+          </button>
+          <AnimatePresence initial={false}>
+            {isOpen && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="px-4 pb-4 text-gray-300 text-sm leading-relaxed"
               >
-                <span>{item.q}</span>
-                <ChevronDown
-                  className={`h-5 w-5 transform transition-transform ${
-                    isOpen ? "rotate-180 text-orange-500" : "text-gray-400"
-                  }`}
-                />
-              </button>
-              <AnimatePresence initial={false}>
-                {isOpen && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="px-4 pb-4 text-gray-300 text-sm leading-relaxed"
-                  >
-                    {item.a}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          );
-        })}
-      </div>
+                {item.a}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      );
+    })}
+  </div>
+</div>
+
+
     </section>
   );
 };
