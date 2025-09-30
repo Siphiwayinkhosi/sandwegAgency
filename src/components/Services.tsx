@@ -31,7 +31,7 @@ export default function Services() {
             to your business.
           </p>
 
-          {/* Core Benefits (bordered) */}
+          {/* Core Benefits */}
           <div>
             <h2 className="text-xl font-semibold text-white mb-2">
               Core Benefits
@@ -46,7 +46,7 @@ export default function Services() {
             </div>
           </div>
 
-          {/* Use Cases (bordered) */}
+          {/* Use Cases */}
           <div>
             <h2 className="text-xl font-semibold text-white mb-2">Use Cases</h2>
             <div className="border border-orange-500 rounded-xl p-4">
@@ -65,7 +65,7 @@ export default function Services() {
             </div>
           </div>
 
-          {/* How It Works (bordered) */}
+          {/* How It Works */}
           <div>
             <h2 className="text-xl font-semibold text-white mb-2">
               How It Works
@@ -84,10 +84,11 @@ export default function Services() {
             “We saved 15 hours per week using AI scheduling.”
           </blockquote>
 
+          {/* CTA */}
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="px-6 py-3 bg-orange-500 text-white rounded-full font-semibold mt-4"
+            className="px-6 py-3 border border-orange-500 text-white rounded-full font-semibold mt-4 hover:bg-orange-500/10 transition"
           >
             Book a free consultation today
           </motion.button>
@@ -110,7 +111,7 @@ export default function Services() {
           </h1>
           <p>Your website is your digital storefront—make it unforgettable.</p>
 
-          {/* What We Offer (bordered) */}
+          {/* What We Offer */}
           <div>
             <h2 className="text-xl font-semibold text-white mb-2">
               What We Offer
@@ -125,13 +126,14 @@ export default function Services() {
             </div>
           </div>
 
+          {/* Portfolio */}
           <div>
             <h2 className="text-xl font-semibold text-white mb-2">
               Portfolio / Showcase
             </h2>
           </div>
 
-          {/* Process (bordered) */}
+          {/* Process */}
           <div>
             <h2 className="text-xl font-semibold text-white mb-2">Process</h2>
             <div className="border border-orange-500 rounded-xl p-4">
@@ -144,10 +146,11 @@ export default function Services() {
             </div>
           </div>
 
+          {/* CTA */}
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="px-6 py-3 bg-orange-500 text-white rounded-full font-semibold mt-4"
+            className="px-6 py-3 border border-orange-500 text-white rounded-full font-semibold mt-4 hover:bg-orange-500/10 transition"
           >
             Let&apos;s get you started with a new website
           </motion.button>
@@ -178,7 +181,7 @@ export default function Services() {
             for the right people to discover your business.
           </p>
 
-          {/* Why SEO Matters (bordered) */}
+          {/* Why SEO Matters */}
           <div>
             <h2 className="text-xl font-semibold text-white mb-2">
               Why SEO Matters
@@ -191,7 +194,7 @@ export default function Services() {
             </div>
           </div>
 
-          {/* Our Services (bordered) */}
+          {/* Our Services */}
           <div>
             <h2 className="text-xl font-semibold text-white mb-2">
               Our Services
@@ -206,7 +209,7 @@ export default function Services() {
             </div>
           </div>
 
-          {/* Results-Oriented (not boxed) */}
+          {/* Results */}
           <div>
             <h2 className="text-xl font-semibold text-white mb-2">
               Results-Oriented
@@ -216,7 +219,7 @@ export default function Services() {
             </p>
           </div>
 
-          {/* Pricing / Packages (bordered) */}
+          {/* Pricing */}
           <div>
             <h2 className="text-xl font-semibold text-white mb-2">
               Pricing / Packages
@@ -230,10 +233,11 @@ export default function Services() {
             </div>
           </div>
 
+          {/* CTA */}
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="px-6 py-3 bg-orange-500 text-white rounded-full font-semibold mt-4"
+            className="px-6 py-3 border border-orange-500 text-white rounded-full font-semibold mt-4 hover:bg-orange-500/10 transition"
           >
             Request your free SEO audit
           </motion.button>
@@ -300,7 +304,7 @@ const GridItem = ({ title, shortLines, fullContent, expanded, onClick }) => {
         layout
         className="relative h-full rounded-3xl border border-gray-800 bg-neutral-900/95 px-8 py-12 flex flex-col shadow-lg"
       >
-        {/* Header row with title and dropdown button */}
+        {/* Header row */}
         <div className="flex items-center justify-between mb-6">
           <h3 className="text-3xl md:text-4xl font-semibold text-white">
             {title}
@@ -308,23 +312,17 @@ const GridItem = ({ title, shortLines, fullContent, expanded, onClick }) => {
 
           <button
             onClick={onClick}
-            className="group p-2 rounded-full border border-gray-700 hover:bg-orange-500 transition"
+            className="group p-2 rounded-full border border-orange-500 transition"
           >
             {expanded ? (
-              <ChevronUp
-                size={20}
-                className="text-orange-500 group-hover:text-white"
-              />
+              <ChevronUp size={20} className="text-orange-500" />
             ) : (
-              <ChevronDown
-                size={20}
-                className="text-orange-500 group-hover:text-white"
-              />
+              <ChevronDown size={20} className="text-orange-500" />
             )}
           </button>
         </div>
 
-        {/* Short list (always visible, plain) */}
+        {/* Short list */}
         {shortLines?.length > 0 && (
           <ul className="space-y-2 text-neutral-300 mb-6 list-disc list-inside">
             {shortLines.map((item, idx) => (
@@ -333,7 +331,7 @@ const GridItem = ({ title, shortLines, fullContent, expanded, onClick }) => {
           </ul>
         )}
 
-        {/* Expanded section */}
+        {/* Expanded */}
         <AnimatePresence>
           {expanded && (
             <motion.div
