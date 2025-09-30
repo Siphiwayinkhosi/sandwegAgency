@@ -15,7 +15,7 @@ export default function Services() {
         { text: "AI Scheduling" },
       ],
       fullContent: (
-        <div className="space-y-6 text-neutral-200">
+        <div className="space-y-6 text-neutral-200 text-lg sm:text-xl leading-relaxed">
           <h1 className="text-3xl md:text-4xl font-bold text-white">
             Smarten Your Business with AI Automations
           </h1>
@@ -36,8 +36,8 @@ export default function Services() {
             <h2 className="text-xl font-semibold text-white mb-2">
               Core Benefits
             </h2>
-            <div className="border border-orange-500 rounded-xl p-4">
-              <ul className="list-disc list-inside space-y-1 text-white">
+            <div className="border border-orange-500 rounded-xl p-5">
+              <ul className="list-disc list-inside space-y-2 text-white text-base sm:text-lg">
                 <li>Automate repetitive tasks</li>
                 <li>AI chatbots & virtual receptionists</li>
                 <li>Smart scheduling & lead qualification</li>
@@ -49,8 +49,8 @@ export default function Services() {
           {/* Use Cases */}
           <div>
             <h2 className="text-xl font-semibold text-white mb-2">Use Cases</h2>
-            <div className="border border-orange-500 rounded-xl p-4">
-              <ul className="list-disc list-inside space-y-1 text-white">
+            <div className="border border-orange-500 rounded-xl p-5">
+              <ul className="list-disc list-inside space-y-2 text-white text-base sm:text-lg">
                 <li>
                   <b>Small businesses:</b> customer support & appointment booking
                 </li>
@@ -70,8 +70,8 @@ export default function Services() {
             <h2 className="text-xl font-semibold text-white mb-2">
               How It Works
             </h2>
-            <div className="border border-orange-500 rounded-xl p-4">
-              <ol className="list-decimal list-inside space-y-1 text-white">
+            <div className="border border-orange-500 rounded-xl p-5">
+              <ol className="list-decimal list-inside space-y-2 text-white text-base sm:text-lg">
                 <li>Audit your processes</li>
                 <li>Identify automation opportunities</li>
                 <li>Build & integrate AI workflows</li>
@@ -80,7 +80,7 @@ export default function Services() {
             </div>
           </div>
 
-          <blockquote className="italic text-orange-400">
+          <blockquote className="italic text-orange-400 text-lg sm:text-xl">
             “We saved 15 hours per week using AI scheduling.”
           </blockquote>
 
@@ -88,7 +88,7 @@ export default function Services() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="px-6 py-3 border border-orange-500 text-white rounded-full font-semibold mt-4 hover:bg-orange-500/10 transition"
+            className="px-6 py-3 border border-orange-500 text-white rounded-full font-semibold mt-4 text-lg sm:text-xl hover:bg-orange-500/10 transition"
           >
             Book a free consultation today
           </motion.button>
@@ -105,19 +105,21 @@ export default function Services() {
         { text: "Mobile Responsive" },
       ],
       fullContent: (
-        <div className="space-y-6 text-neutral-200">
+        <div className="space-y-6 text-neutral-200 text-lg sm:text-xl leading-relaxed">
           <h1 className="text-3xl md:text-4xl font-bold text-white">
             Modern Web Design That Converts
           </h1>
-          <p>Your website is your digital storefront—make it unforgettable.</p>
+          <p>
+            Your website is your digital storefront — make it unforgettable.
+          </p>
 
           {/* What We Offer */}
           <div>
             <h2 className="text-xl font-semibold text-white mb-2">
               What We Offer
             </h2>
-            <div className="border border-orange-500 rounded-xl p-4">
-              <ul className="list-disc list-inside space-y-1 text-white">
+            <div className="border border-orange-500 rounded-xl p-5">
+              <ul className="list-disc list-inside space-y-2 text-white text-base sm:text-lg">
                 <li>Custom responsive design</li>
                 <li>Domain & hosting (1 year free)</li>
                 <li>Optimized for speed & mobile</li>
@@ -136,8 +138,8 @@ export default function Services() {
           {/* Process */}
           <div>
             <h2 className="text-xl font-semibold text-white mb-2">Process</h2>
-            <div className="border border-orange-500 rounded-xl p-4">
-              <ol className="list-decimal list-inside space-y-1 text-white">
+            <div className="border border-orange-500 rounded-xl p-5">
+              <ol className="list-decimal list-inside space-y-2 text-white text-base sm:text-lg">
                 <li>Discovery & strategy</li>
                 <li>Design mockups</li>
                 <li>Development & testing</li>
@@ -150,7 +152,7 @@ export default function Services() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="px-6 py-3 border border-orange-500 text-white rounded-full font-semibold mt-4 hover:bg-orange-500/10 transition"
+            className="px-6 py-3 border border-orange-500 text-white rounded-full font-semibold mt-4 text-lg sm:text-xl hover:bg-orange-500/10 transition"
           >
             Let&apos;s get you started with a new website
           </motion.button>
@@ -167,7 +169,7 @@ export default function Services() {
         { text: "Higher Google Ranking" },
       ],
       fullContent: (
-        <div className="space-y-6 text-neutral-200">
+        <div className="space-y-6 text-neutral-200 text-lg sm:text-xl leading-relaxed">
           <h1 className="text-3xl md:text-4xl font-bold text-white">
             Get Found Online with Professional SEO
           </h1>
@@ -186,8 +188,8 @@ export default function Services() {
             <h2 className="text-xl font-semibold text-white mb-2">
               Why SEO Matters
             </h2>
-            <div className="border border-orange-500 rounded-xl p-4">
-              <ul className="list-disc list-inside space-y-1 text-white">
+            <div className="border border-orange-500 rounded-xl p-5">
+              <ul className="list-disc list-inside space-y-2 text-white text-base sm:text-lg">
                 <li>90% of online journeys start with search</li>
                 <li>Higher rankings = more qualified leads</li>
               </ul>
@@ -199,8 +201,8 @@ export default function Services() {
             <h2 className="text-xl font-semibold text-white mb-2">
               Our Services
             </h2>
-            <div className="border border-orange-500 rounded-xl p-4">
-              <ul className="list-disc list-inside space-y-1 text-white">
+            <div className="border border-orange-500 rounded-xl p-5">
+              <ul className="list-disc list-inside space-y-2 text-white text-base sm:text-lg">
                 <li>On-page optimization (titles, meta tags, speed)</li>
                 <li>Keyword research & content strategy</li>
                 <li>Local SEO (Google Business Profile, maps)</li>
@@ -214,7 +216,7 @@ export default function Services() {
             <h2 className="text-xl font-semibold text-white mb-2">
               Results-Oriented
             </h2>
-            <p className="italic text-orange-400">
+            <p className="italic text-orange-400 text-lg sm:text-xl">
               “Clients typically see ranking improvements in 3–6 months.”
             </p>
           </div>
@@ -224,8 +226,8 @@ export default function Services() {
             <h2 className="text-xl font-semibold text-white mb-2">
               Pricing / Packages
             </h2>
-            <div className="border border-orange-500 rounded-xl p-4">
-              <ul className="list-disc list-inside space-y-1 text-white">
+            <div className="border border-orange-500 rounded-xl p-5">
+              <ul className="list-disc list-inside space-y-2 text-white text-base sm:text-lg">
                 <li>Starter: Local SEO setup</li>
                 <li>Growth: Full website optimization</li>
                 <li>Premium: Ongoing SEO campaigns</li>
@@ -237,7 +239,7 @@ export default function Services() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="px-6 py-3 border border-orange-500 text-white rounded-full font-semibold mt-4 hover:bg-orange-500/10 transition"
+            className="px-6 py-3 border border-orange-500 text-white rounded-full font-semibold mt-4 text-lg sm:text-xl hover:bg-orange-500/10 transition"
           >
             Request your free SEO audit
           </motion.button>
@@ -248,6 +250,7 @@ export default function Services() {
 
   return (
     <section className="w-full bg-black py-20 relative">
+      {/* Heading stays same size */}
       <h2 className="mb-12 text-center text-5xl font-bold text-white">
         Our Services
       </h2>
@@ -315,16 +318,16 @@ const GridItem = ({ title, shortLines, fullContent, expanded, onClick }) => {
             className="group p-2 rounded-full border border-orange-500 transition"
           >
             {expanded ? (
-              <ChevronUp size={20} className="text-orange-500" />
+              <ChevronUp size={22} className="text-orange-500" />
             ) : (
-              <ChevronDown size={20} className="text-orange-500" />
+              <ChevronDown size={22} className="text-orange-500" />
             )}
           </button>
         </div>
 
         {/* Short list */}
         {shortLines?.length > 0 && (
-          <ul className="space-y-2 text-neutral-300 mb-6 list-disc list-inside">
+          <ul className="space-y-2 text-neutral-300 mb-6 list-disc list-inside text-base sm:text-lg">
             {shortLines.map((item, idx) => (
               <li key={idx}>{item.text}</li>
             ))}

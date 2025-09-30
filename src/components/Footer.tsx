@@ -35,28 +35,26 @@ const Footer: React.FC = () => {
     >
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10 items-center">
         {/* Brand + Logo */}
-   <motion.div
-  variants={itemVariants}
-  className="flex flex-col md:flex-row items-center md:items-center justify-center md:justify-start gap-3 md:gap-4 text-center md:text-left"
->
-  <img src="/logo.png" alt="Sandweg Logo" className="w-20 h-20" />
+        <motion.div
+          variants={itemVariants}
+          className="flex flex-col md:flex-row items-center md:items-center justify-center md:justify-start gap-3 md:gap-4 text-center md:text-left"
+        >
+          <img src="/logo.png" alt="Sandweg Logo" className="w-20 h-20" />
 
-  <div className="flex flex-col items-center md:items-start">
-    <h3 className="text-2xl font-bold text-white tracking-wide">
-      Sandweg
-    </h3>
-    <p className="text-sm text-white">
-      Branding & Marketing Agency
-    </p>
-  </div>
-</motion.div>
-
-
+          <div className="flex flex-col items-center md:items-start">
+            <h3 className="text-2xl font-bold text-white tracking-wide">
+              Sandweg
+            </h3>
+            <p className="text-base sm:text-lg text-white">
+              Branding & Marketing Agency
+            </p>
+          </div>
+        </motion.div>
 
         {/* Navigation */}
         <motion.ul
           variants={containerVariants}
-          className="flex flex-wrap justify-center gap-6 text-sm font-medium"
+          className="flex flex-wrap justify-center gap-6 text-base sm:text-lg font-medium"
         >
           {navLinks.map((link, i) => (
             <motion.li key={i} variants={itemVariants}>
@@ -88,7 +86,7 @@ const Footer: React.FC = () => {
               whileTap={{ scale: 0.9 }}
               className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-500 hover:border-orange-500 transition"
             >
-              <Icon size={20} />
+              <Icon size={22} />
             </motion.a>
           ))}
         </motion.div>
@@ -97,7 +95,7 @@ const Footer: React.FC = () => {
       {/* Divider + Copyright */}
       <motion.div
         variants={itemVariants}
-        className="border-t border-gray-700 mt-8 pt-6 text-center text-sm text-gray-500"
+        className="border-t border-gray-700 mt-8 pt-6 text-center text-base sm:text-lg text-gray-500"
       >
         © {new Date().getFullYear()} Sandweg. All rights reserved.
       </motion.div>

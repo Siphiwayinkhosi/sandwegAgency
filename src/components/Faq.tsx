@@ -25,18 +25,39 @@ const faqs: FAQ[] = [
           </ul>
         ),
       },
-      { q: "Do you offer complete packages?", a: "Yes. We often combine webdesign, SEO, and automation into “Smart Business Solutions” that give fast, measurable results." },
-      { q: "Can I book a single service only (like SEO or Google Ads)?", a: "Of course. Many clients start with one service and later expand into full solutions." },
-      { q: "Do you create content too?", a: "Yes – we produce SEO-optimized texts, blog posts, social media content, and even AI-generated videos or chat scripts." },
+      {
+        q: "Do you offer complete packages?",
+        a: "Yes. We often combine webdesign, SEO, and automation into “Smart Business Solutions” that give fast, measurable results.",
+      },
+      {
+        q: "Can I book a single service only (like SEO or Google Ads)?",
+        a: "Of course. Many clients start with one service and later expand into full solutions.",
+      },
+      {
+        q: "Do you create content too?",
+        a: "Yes – we produce SEO-optimized texts, blog posts, social media content, and even AI-generated videos or chat scripts.",
+      },
     ],
   },
   {
     category: "Pricing & Contracts",
     items: [
-      { q: "How much does a website cost?", a: "Our smart websites start at around €2,000. Final pricing depends on features (booking system, AI integrations, e-commerce, etc.)." },
-      { q: "Do you charge monthly fees?", a: "Yes, for hosting, SEO, maintenance, and ongoing support. Packages typically range from €50–€500/month depending on scope. Bigger packages available." },
-      { q: "Do you work on commission or performance basis?", a: "Yes. With selected clients we work on a share-deal model – meaning we reduce upfront costs and participate in revenue growth." },
-      { q: "Do you require long-term contracts?", a: "No. Many services can be booked flexibly. For SEO and ads, we recommend at least 3–6 months to see measurable impact." },
+      {
+        q: "How much does a website cost?",
+        a: "Our smart websites start at around €2,000. Final pricing depends on features (booking system, AI integrations, e-commerce, etc.).",
+      },
+      {
+        q: "Do you charge monthly fees?",
+        a: "Yes, for hosting, SEO, maintenance, and ongoing support. Packages typically range from €50–€500/month depending on scope. Bigger packages available.",
+      },
+      {
+        q: "Do you work on commission or performance basis?",
+        a: "Yes. With selected clients we work on a share-deal model – meaning we reduce upfront costs and participate in revenue growth.",
+      },
+      {
+        q: "Do you require long-term contracts?",
+        a: "No. Many services can be booked flexibly. For SEO and ads, we recommend at least 3–6 months to see measurable impact.",
+      },
     ],
   },
   {
@@ -66,7 +87,10 @@ const faqs: FAQ[] = [
           </ul>
         ),
       },
-      { q: "Can AI replace my staff?", a: "No – but it can take over repetitive tasks (answering FAQs, scheduling, qualifying leads), allowing your team to focus on real business." },
+      {
+        q: "Can AI replace my staff?",
+        a: "No – but it can take over repetitive tasks (answering FAQs, scheduling, qualifying leads), allowing your team to focus on real business.",
+      },
     ],
   },
   {
@@ -142,83 +166,77 @@ const Faq = () => {
   useEffect(() => {
     // auto-open first item when category changes
     const firstItem = faqs.find((f) => f.category === activeCategory)?.items[0];
-    if (firstItem) {
-      setOpen(`${activeCategory}-0`);
-    }
+    if (firstItem) setOpen(`${activeCategory}-0`);
   }, [activeCategory]);
 
   const currentFaqs = faqs.find((f) => f.category === activeCategory);
 
   return (
     <section className="bg-black text-white font-raleway py-20 px-4 sm:px-10">
-      {/* Heading */}
+      {/* Heading (unchanged as requested) */}
       <h2 className="text-4xl sm:text-5xl font-bold text-center mb-12 text-white">
-       Everything You Need to Know
+        Everything You Need to Know
       </h2>
 
-  {/* Shared container for tabs + boxes */}
-<div className="max-w-7xl mx-auto px-4">
-  {/* Category Tabs */}
-<div className="flex flex-wrap justify-center gap-3 mb-12">
-  {faqs.map((f) => (
-    <button
-      key={f.category}
-      onClick={() => setActiveCategory(f.category)}
-      className={`px-4 py-2 rounded-full border transition ${
-        activeCategory === f.category
-          ? "border-orange-500 text-white font-semibold"
-          : "border-gray-600 text-white hover:border-orange-400"
-      }`}
-    >
-      {f.category}
-    </button>
-  ))}
-</div>
-
-
-  {/* Accordion for Selected Category */}
-  <div className="space-y-4">
-    {currentFaqs?.items.map((item, idx) => {
-      const id = `${activeCategory}-${idx}`;
-      const isOpen = open === id;
-      return (
-        <div
-          key={id}
-          className="border border-gray-700 rounded-lg overflow-hidden"
-        >
-          <button
-            onClick={() => setOpen(isOpen ? null : id)}
-            className="w-full flex justify-between items-center px-4 py-3 text-left hover:bg-gray-900 transition"
-          >
-            <span>{item.q}</span>
-            <ChevronDown
-              className={`h-5 w-5 transform transition-transform ${
-                isOpen ? "rotate-180 text-orange-500" : "text-gray-400"
+      <div className="max-w-7xl mx-auto px-4">
+        {/* Category Tabs — larger text, active has orange border only (text stays white) */}
+        <div className="flex flex-wrap justify-center gap-3 mb-12">
+          {faqs.map((f) => (
+            <button
+              key={f.category}
+              onClick={() => setActiveCategory(f.category)}
+              className={`px-5 py-2.5 rounded-full border transition text-base sm:text-lg ${
+                activeCategory === f.category
+                  ? "border-orange-500 text-white font-semibold"
+                  : "border-gray-600 text-white hover:border-orange-400"
               }`}
-            />
-          </button>
-          <AnimatePresence initial={false}>
-            {isOpen && (
-              <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                className="px-4 pb-4 text-gray-300 text-sm leading-relaxed"
-              >
-                {item.a}
-              </motion.div>
-            )}
-          </AnimatePresence>
+            >
+              {f.category}
+            </button>
+          ))}
         </div>
-      );
-    })}
-  </div>
-</div>
 
+        {/* Accordion */}
+        <div className="space-y-4">
+          {currentFaqs?.items.map((item, idx) => {
+            const id = `${activeCategory}-${idx}`;
+            const isOpen = open === id;
 
+            return (
+              <div key={id} className="border border-gray-700 rounded-lg overflow-hidden">
+                <button
+                  onClick={() => setOpen(isOpen ? null : id)}
+                  className="w-full flex justify-between items-center px-5 py-4 text-left hover:bg-gray-900 transition text-lg sm:text-xl"
+                >
+                  <span>{item.q}</span>
+                  <ChevronDown
+                    className={`h-6 w-6 transform transition-transform ${
+                      isOpen ? "rotate-180 text-orange-500" : "text-gray-400"
+                    }`}
+                  />
+                </button>
+
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="px-5 pb-5 text-gray-300 text-base sm:text-lg leading-relaxed"
+                    >
+                      {item.a}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
+        </div>
+      </div>
     </section>
   );
 };
 
 export default Faq;
+
