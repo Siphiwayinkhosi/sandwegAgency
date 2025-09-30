@@ -5,15 +5,18 @@ const Platz = () => {
 
   return (
     <section className="w-full bg-black text-center text-white py-10 font-raleway">
-      {/* Top text */}
-      <h2 className="text-xl md:text-5xl font-semibold mb-6">
+      {/* Top text - hidden on mobile */}
+      <h2 className="hidden sm:block text-xl md:text-5xl font-semibold mb-6">
         Besuch uns im Sony Center am Potsdamer Platz in Berlin
       </h2>
 
-      {/* Clickable Video */}
+      {/* Video wrapper */}
       <div
-        className="w-full cursor-pointer"
-        onClick={() => setExpanded(!expanded)}
+        className="w-full"
+        // 👉 only clickable on sm+ (tablet & desktop)
+        onClick={() => {
+          if (window.innerWidth >= 640) setExpanded(!expanded);
+        }}
       >
         <div
           className={`w-full overflow-hidden rounded-2xl shadow-lg transition-all duration-700 ease-in-out ${
@@ -31,8 +34,12 @@ const Platz = () => {
             }`}
           />
         </div>
-        <p className="text-sm text-gray-400 mt-2">
-          {expanded ? "Klicken Sie, um zu minimieren" : "Klicken Sie, um zu erweitern"}
+
+        {/* Toggle text - hidden on mobile */}
+        <p className="hidden sm:block text-sm text-gray-400 mt-2">
+          {expanded
+            ? "Klicken Sie, um zu minimieren"
+            : "Klicken Sie, um zu erweitern"}
         </p>
       </div>
     </section>

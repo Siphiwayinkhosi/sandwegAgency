@@ -7,9 +7,11 @@ export default function MacbookScrollDemo() {
       <div className="w-full">
         <MacbookScroll
           title={
-            <span className="text-white text-4xl sm:text-5xl font-semibold leading-snug">
-              AI websites & tools <br /> that grow your business.
-            </span>
+    <span className="uppercase tracking-[0.15em] sm:tracking-[0.35em] text-3xl sm:text-5xl md:text-6xl font-semibold text-white leading-tight">
+  AI websites & tools <br /> that grow your business.
+</span>
+
+
           }
         
           src="/video.mp4"

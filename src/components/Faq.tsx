@@ -159,21 +159,22 @@ const Faq = () => {
   {/* Shared container for tabs + boxes */}
 <div className="max-w-7xl mx-auto px-4">
   {/* Category Tabs */}
-  <div className="flex flex-wrap justify-center gap-3 mb-12">
-    {faqs.map((f) => (
-      <button
-        key={f.category}
-        onClick={() => setActiveCategory(f.category)}
-        className={`px-4 py-2 rounded-full border transition ${
-          activeCategory === f.category
-            ? "border-orange-500 text-orange-500 font-semibold"
-            : "border-gray-600 text-white hover:border-orange-400 hover:text-orange-400"
-        }`}
-      >
-        {f.category}
-      </button>
-    ))}
-  </div>
+<div className="flex flex-wrap justify-center gap-3 mb-12">
+  {faqs.map((f) => (
+    <button
+      key={f.category}
+      onClick={() => setActiveCategory(f.category)}
+      className={`px-4 py-2 rounded-full border transition ${
+        activeCategory === f.category
+          ? "border-orange-500 text-white font-semibold"
+          : "border-gray-600 text-white hover:border-orange-400"
+      }`}
+    >
+      {f.category}
+    </button>
+  ))}
+</div>
+
 
   {/* Accordion for Selected Category */}
   <div className="space-y-4">

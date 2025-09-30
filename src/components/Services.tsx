@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Settings, Sparkles, ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Services() {
@@ -8,7 +8,6 @@ export default function Services() {
   const cards = [
     // === AI INTEGRATIONS ===
     {
-      icon: <Box className="h-10 w-10 text-orange-500" />,
       title: "AI Integrations",
       shortLines: [
         { text: "Virtual Receptionists" },
@@ -20,6 +19,7 @@ export default function Services() {
           <h1 className="text-3xl md:text-4xl font-bold text-white">
             Smarten Your Business with AI Automations
           </h1>
+
           <p>
             Smarten your business with AI.
             <br />
@@ -31,44 +31,53 @@ export default function Services() {
             to your business.
           </p>
 
+          {/* Core Benefits (bordered) */}
           <div>
             <h2 className="text-xl font-semibold text-white mb-2">
               Core Benefits
             </h2>
-            <ul className="list-disc list-inside space-y-1">
-              <li>Automate repetitive tasks</li>
-              <li>AI chatbots & virtual receptionists</li>
-              <li>Smart scheduling & lead qualification</li>
-              <li>Cost savings & scalability</li>
-            </ul>
+            <div className="border border-orange-500 rounded-xl p-4">
+              <ul className="list-disc list-inside space-y-1 text-white">
+                <li>Automate repetitive tasks</li>
+                <li>AI chatbots & virtual receptionists</li>
+                <li>Smart scheduling & lead qualification</li>
+                <li>Cost savings & scalability</li>
+              </ul>
+            </div>
           </div>
 
+          {/* Use Cases (bordered) */}
           <div>
             <h2 className="text-xl font-semibold text-white mb-2">Use Cases</h2>
-            <ul className="list-disc list-inside space-y-1">
-              <li>
-                <b>Small businesses:</b> customer support & appointment booking
-              </li>
-              <li>
-                <b>Medium enterprises:</b> workflow automations (CRM, emails,
-                reporting)
-              </li>
-              <li>
-                <b>Agencies:</b> faster lead handling, client dashboards
-              </li>
-            </ul>
+            <div className="border border-orange-500 rounded-xl p-4">
+              <ul className="list-disc list-inside space-y-1 text-white">
+                <li>
+                  <b>Small businesses:</b> customer support & appointment booking
+                </li>
+                <li>
+                  <b>Medium enterprises:</b> workflow automations (CRM, emails,
+                  reporting)
+                </li>
+                <li>
+                  <b>Agencies:</b> faster lead handling, client dashboards
+                </li>
+              </ul>
+            </div>
           </div>
 
+          {/* How It Works (bordered) */}
           <div>
             <h2 className="text-xl font-semibold text-white mb-2">
               How It Works
             </h2>
-            <ol className="list-decimal list-inside space-y-1">
-              <li>Audit your processes</li>
-              <li>Identify automation opportunities</li>
-              <li>Build & integrate AI workflows</li>
-              <li>Ongoing optimization</li>
-            </ol>
+            <div className="border border-orange-500 rounded-xl p-4">
+              <ol className="list-decimal list-inside space-y-1 text-white">
+                <li>Audit your processes</li>
+                <li>Identify automation opportunities</li>
+                <li>Build & integrate AI workflows</li>
+                <li>Ongoing optimization</li>
+              </ol>
+            </div>
           </div>
 
           <blockquote className="italic text-orange-400">
@@ -88,7 +97,6 @@ export default function Services() {
 
     // === WEB DESIGN ===
     {
-      icon: <Settings className="h-10 w-10 text-orange-500" />,
       title: "Web Design",
       shortLines: [
         { text: "Scalable Web Design" },
@@ -102,33 +110,38 @@ export default function Services() {
           </h1>
           <p>Your website is your digital storefront—make it unforgettable.</p>
 
+          {/* What We Offer (bordered) */}
           <div>
             <h2 className="text-xl font-semibold text-white mb-2">
               What We Offer
             </h2>
-            <ul className="list-disc list-inside space-y-1">
-              <li>Custom responsive design</li>
-              <li>Domain & hosting (1 year free)</li>
-              <li>Optimized for speed & mobile</li>
-              <li>Future-ready with integrations (chat, AI, booking)</li>
-            </ul>
+            <div className="border border-orange-500 rounded-xl p-4">
+              <ul className="list-disc list-inside space-y-1 text-white">
+                <li>Custom responsive design</li>
+                <li>Domain & hosting (1 year free)</li>
+                <li>Optimized for speed & mobile</li>
+                <li>Future-ready with integrations (chat, AI, booking)</li>
+              </ul>
+            </div>
           </div>
 
           <div>
             <h2 className="text-xl font-semibold text-white mb-2">
               Portfolio / Showcase
             </h2>
-           
           </div>
 
+          {/* Process (bordered) */}
           <div>
             <h2 className="text-xl font-semibold text-white mb-2">Process</h2>
-            <ol className="list-decimal list-inside space-y-1">
-              <li>Discovery & strategy</li>
-              <li>Design mockups</li>
-              <li>Development & testing</li>
-              <li>Launch & support</li>
-            </ol>
+            <div className="border border-orange-500 rounded-xl p-4">
+              <ol className="list-decimal list-inside space-y-1 text-white">
+                <li>Discovery & strategy</li>
+                <li>Design mockups</li>
+                <li>Development & testing</li>
+                <li>Launch & support</li>
+              </ol>
+            </div>
           </div>
 
           <motion.button
@@ -144,7 +157,6 @@ export default function Services() {
 
     // === SEO ===
     {
-      icon: <Sparkles className="h-10 w-10 text-orange-500" />,
       title: "SEO",
       shortLines: [
         { text: "Search Engine Optimization" },
@@ -163,33 +175,38 @@ export default function Services() {
             SEO (Search Engine Optimization) is the key to more visibility,
             more traffic, and more customers. We optimize your website so it
             ranks higher on Google and other search engines – making it easier
-            for the right people to discover your business. From keywords and
-            content strategy to local search and technical improvements, our SEO
-            services build lasting growth and stronger online authority.
+            for the right people to discover your business.
           </p>
 
+          {/* Why SEO Matters (bordered) */}
           <div>
             <h2 className="text-xl font-semibold text-white mb-2">
               Why SEO Matters
             </h2>
-            <ul className="list-disc list-inside space-y-1">
-              <li>90% of online journeys start with search</li>
-              <li>Higher rankings = more qualified leads</li>
-            </ul>
+            <div className="border border-orange-500 rounded-xl p-4">
+              <ul className="list-disc list-inside space-y-1 text-white">
+                <li>90% of online journeys start with search</li>
+                <li>Higher rankings = more qualified leads</li>
+              </ul>
+            </div>
           </div>
 
+          {/* Our Services (bordered) */}
           <div>
             <h2 className="text-xl font-semibold text-white mb-2">
               Our Services
             </h2>
-            <ul className="list-disc list-inside space-y-1">
-              <li>On-page optimization (titles, meta tags, speed)</li>
-              <li>Keyword research & content strategy</li>
-              <li>Local SEO (Google Business Profile, maps)</li>
-              <li>Link building & authority growth</li>
-            </ul>
+            <div className="border border-orange-500 rounded-xl p-4">
+              <ul className="list-disc list-inside space-y-1 text-white">
+                <li>On-page optimization (titles, meta tags, speed)</li>
+                <li>Keyword research & content strategy</li>
+                <li>Local SEO (Google Business Profile, maps)</li>
+                <li>Link building & authority growth</li>
+              </ul>
+            </div>
           </div>
 
+          {/* Results-Oriented (not boxed) */}
           <div>
             <h2 className="text-xl font-semibold text-white mb-2">
               Results-Oriented
@@ -197,18 +214,20 @@ export default function Services() {
             <p className="italic text-orange-400">
               “Clients typically see ranking improvements in 3–6 months.”
             </p>
-           
           </div>
 
+          {/* Pricing / Packages (bordered) */}
           <div>
             <h2 className="text-xl font-semibold text-white mb-2">
               Pricing / Packages
             </h2>
-            <ul className="list-disc list-inside space-y-1">
-              <li>Starter: Local SEO setup</li>
-              <li>Growth: Full website optimization</li>
-              <li>Premium: Ongoing SEO campaigns</li>
-            </ul>
+            <div className="border border-orange-500 rounded-xl p-4">
+              <ul className="list-disc list-inside space-y-1 text-white">
+                <li>Starter: Local SEO setup</li>
+                <li>Growth: Full website optimization</li>
+                <li>Premium: Ongoing SEO campaigns</li>
+              </ul>
+            </div>
           </div>
 
           <motion.button
@@ -244,7 +263,7 @@ export default function Services() {
   );
 }
 
-const GridItem = ({ icon, title, shortLines, fullContent, expanded, onClick }) => {
+const GridItem = ({ title, shortLines, fullContent, expanded, onClick }) => {
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const [hover, setHover] = useState(false);
 
@@ -281,37 +300,38 @@ const GridItem = ({ icon, title, shortLines, fullContent, expanded, onClick }) =
         layout
         className="relative h-full rounded-3xl border border-gray-800 bg-neutral-900/95 px-8 py-12 flex flex-col shadow-lg"
       >
-        {/* Header row with icon, title, and dropdown button */}
+        {/* Header row with title and dropdown button */}
         <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-4">
-            {icon}
-            <h3 className="text-2xl md:text-3xl font-semibold text-white">
-              {title}
-            </h3>
-          </div>
+          <h3 className="text-3xl md:text-4xl font-semibold text-white">
+            {title}
+          </h3>
 
-         {/* Dropdown toggle button */}
-{/* Dropdown toggle button */}
-<button
-  onClick={onClick}
-  className="group p-2 rounded-full border border-gray-700 hover:bg-orange-500 transition"
->
-  {expanded ? (
-    <ChevronUp size={20} className="text-orange-500 group-hover:text-white" />
-  ) : (
-    <ChevronDown size={20} className="text-orange-500 group-hover:text-white" />
-  )}
-</button>
-
-
+          <button
+            onClick={onClick}
+            className="group p-2 rounded-full border border-gray-700 hover:bg-orange-500 transition"
+          >
+            {expanded ? (
+              <ChevronUp
+                size={20}
+                className="text-orange-500 group-hover:text-white"
+              />
+            ) : (
+              <ChevronDown
+                size={20}
+                className="text-orange-500 group-hover:text-white"
+              />
+            )}
+          </button>
         </div>
 
-        {/* Short list always visible */}
-        <motion.ul layout className="space-y-3 text-neutral-300 mb-6">
-          {shortLines?.map((item, idx) => (
-            <li key={idx}>{item.text}</li>
-          ))}
-        </motion.ul>
+        {/* Short list (always visible, plain) */}
+        {shortLines?.length > 0 && (
+          <ul className="space-y-2 text-neutral-300 mb-6 list-disc list-inside">
+            {shortLines.map((item, idx) => (
+              <li key={idx}>{item.text}</li>
+            ))}
+          </ul>
+        )}
 
         {/* Expanded section */}
         <AnimatePresence>

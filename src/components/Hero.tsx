@@ -176,23 +176,23 @@ const Hero = () => {
           </motion.div>
         </div>
 
-        {/* Line - Uses -translate-x-1/2 for perfect centering on pos.left */}
-        <motion.div
-          className="absolute w-[2px] bg-orange-500 -translate-x-1/2 origin-top"
-          style={{
-            left: `${pos.left}px`,
-            top: `${pos.top}px`,
-          }}
-          initial={{ height: 0, opacity: 0 }}
-          animate={{
-            height: pos.measured ? pos.height : 0,
-            opacity: pos.measured ? 1 : 0,
-          }}
-          transition={{ duration: 1.1, ease: "easeInOut" }}
-        />
+      {/* Line */}
+<motion.div
+  className="absolute w-[1px] bg-orange-500 -translate-x-1/2 origin-top"
+  style={{
+    left: `${pos.left}px`,
+    top: `${pos.top}px`,
+  }}
+  initial={{ height: 0, opacity: 0 }}
+  animate={{
+    height: pos.measured ? pos.height : 0,
+    opacity: pos.measured ? 1 : 0,
+  }}
+  transition={{ duration: 1.1, ease: "easeInOut" }}
+/>
 
-        {/* Dots - Uses -translate-x-1/2 for perfect centering on pos.left */}
-        {pos.centers.map((c, i) => (
+{/* Dots */}
+{pos.centers.map((c, i) => (
   <motion.div
     key={i}
     className="absolute flex items-center justify-center"
@@ -209,9 +209,10 @@ const Hero = () => {
       damping: 22,
     }}
   >
-    <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-orange-500 -translate-x-1/2 -translate-y-1/2" />
+    <div className="w-1 h-1 sm:w-2 sm:h-2 rounded-full bg-orange-500 -translate-x-1/2 -translate-y-1/2" />
   </motion.div>
 ))}
+
 
       </div>
     </section>
