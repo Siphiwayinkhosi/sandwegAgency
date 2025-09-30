@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 const Hero = () => {
   const [language, setLanguage] = useState("EN");
 
-  // Refs for layout
   const containerRef = useRef(null);
   const leftColRef = useRef(null);
   const line1Ref = useRef(null);
@@ -68,7 +67,7 @@ const Hero = () => {
       }
     };
 
-    runMeasureRef.current = runMeasure; // make available outside
+    runMeasureRef.current = runMeasure;
     runMeasure();
 
     const resizeObserver = new ResizeObserver(runMeasure);
@@ -100,9 +99,8 @@ const Hero = () => {
           className="flex items-center gap-3 sm:gap-6"
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.9 }}
+          transition={{ duration: 1.5 }}
         >
-          {/* smaller logo on mobile */}
           <img src="/logo.png" alt="Logo" className="w-20 sm:w-32 md:w-40" />
           <div className="flex flex-col leading-snug">
             <span className="uppercase text-sm sm:text-base md:text-lg font-semibold tracking-wider">
@@ -154,66 +152,77 @@ const Hero = () => {
         <div ref={leftColRef} className="w-6 sm:w-12 mr-3 sm:mr-6 flex-shrink-0" />
 
         <div className="flex flex-col justify-center leading-tight space-y-4 sm:space-y-6">
+          {/* DESIGN */}
           <motion.div
             ref={line1Ref}
             className="uppercase tracking-[0.15em] sm:tracking-[0.35em] text-3xl sm:text-5xl md:text-8xl font-semibold"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1.8, delay: 0.8 }}
           >
             DESIGN
           </motion.div>
 
+          {/* MEETS */}
           <motion.div
             ref={line2Ref}
             className="uppercase tracking-[0.15em] sm:tracking-[0.35em] text-3xl sm:text-5xl md:text-8xl font-semibold"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1.8, delay: 1.4 }}
           >
             MEETS
           </motion.div>
 
+          {/* TECHNOLOGY */}
           <motion.div
             ref={line3Ref}
             className="uppercase tracking-[0.15em] sm:tracking-[0.35em] text-3xl sm:text-5xl md:text-8xl font-semibold"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1.8, delay: 2.0 }}
           >
             TECHNOLOGY
           </motion.div>
         </div>
 
-      {/* Line */}
-<motion.div
-  className="absolute w-[1px] bg-orange-500 -translate-x-1/2 origin-top"
-  style={{
-    left: `${pos.left}px`,
-    top: `${pos.top}px`,
-  }}
-  initial={{ height: 0, opacity: 0 }}
-  animate={{
-    height: pos.measured ? pos.height : 0,
-    opacity: pos.measured ? 1 : 0,
-  }}
-  transition={{ duration: 1.1, ease: "easeInOut" }}
-/>
+        {/* Line */}
+        <motion.div
+          className="absolute w-[1px] bg-orange-500 -translate-x-1/2 origin-top"
+          style={{
+            left: `${pos.left}px`,
+            top: `${pos.top}px`,
+          }}
+          initial={{ height: 0, opacity: 0 }}
+          animate={{
+            height: pos.measured ? pos.height : 0,
+            opacity: pos.measured ? 1 : 0,
+          }}
+          transition={{ duration: 2.0, ease: "easeInOut" }}
+        />
 
-{/* Dots */}
-{pos.centers.map((c, i) => (
-  <motion.div
-    key={i}
-    className="absolute flex items-center justify-center"
-    style={{
-      left: `${pos.left}px`,
-      top: `${c}px`,
-    }}
-    initial={{ scale: 0, opacity: 0 }}
-    animate={{ scale: 1, opacity: 1 }}
-    transition={{
-      delay: 1.1 + i * 0.28,
-      type: "spring",
-      stiffness: 400,
-      damping: 22,
-    }}
-  >
-    <div className="w-1 h-1 sm:w-2 sm:h-2 rounded-full bg-orange-500 -translate-x-1/2 -translate-y-1/2" />
-  </motion.div>
-))}
-
-
+        {/* Dots (slower, synced with words) */}
+        {pos.centers.map((c, i) => (
+          <motion.div
+            key={i}
+            className="absolute flex items-center justify-center"
+            style={{
+              left: `${pos.left}px`,
+              top: `${c}px`,
+            }}
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{
+              delay: 0.8 + i * 0.6, // stretched timing to stay in sync
+              duration: 1.6,
+              type: "spring",
+              stiffness: 250,
+              damping: 30,
+            }}
+          >
+            <div className="w-1 h-1 sm:w-2 sm:h-2 rounded-full bg-orange-500 -translate-x-1/2 -translate-y-1/2" />
+          </motion.div>
+        ))}
       </div>
     </section>
   );
