@@ -39,7 +39,7 @@ const Footer: React.FC = () => {
           variants={itemVariants}
           className="flex flex-col md:flex-row items-center md:items-center justify-center md:justify-start gap-3 md:gap-4 text-center md:text-left"
         >
-          <img src="/logo.png" alt="Sandweg Logo" className="w-20 h-20" />
+          <img src="/logo.png" alt="Sandweg Logo" className="max-w-[160px] md:max-w-[200px] h-auto object-contain" />
 
           <div className="flex flex-col items-center md:items-start">
             <h3 className="text-2xl font-bold text-white tracking-wide">

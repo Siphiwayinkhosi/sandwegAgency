@@ -113,7 +113,7 @@ const Hero = () => {
         </motion.div>
 
         <div className="flex flex-col items-start gap-2 sm:gap-3 w-max">
-          {/* Language selector */}
+          {/* Language selector
           <div className="flex border border-gray-500 rounded-full overflow-hidden text-xs sm:text-sm w-full">
             <button
               onClick={() => setLanguage("DE")}
@@ -131,7 +131,7 @@ const Hero = () => {
             >
               ENGLISH
             </button>
-          </div>
+          </div> */}
 
           {/* CTA */}
           <motion.button

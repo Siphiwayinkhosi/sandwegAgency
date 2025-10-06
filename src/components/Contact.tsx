@@ -31,7 +31,7 @@ const ContactPanel: React.FC<{ open: boolean; onClose: () => void }> = ({
             {/* Header */}
             <div className="flex items-center justify-between px-8 py-6 border-b border-white/10">
               <div className="flex items-center gap-4">
-                <img src="/logo.png" alt="Logo" className="w-20 h-20" />
+                <img src="/logo.png" alt="Logo" className="max-w-[160px] md:max-w-[200px] h-auto object-contain" />
                 <h2 className="text-2xl font-bold text-white">Contact Us</h2>
               </div>
               <button
