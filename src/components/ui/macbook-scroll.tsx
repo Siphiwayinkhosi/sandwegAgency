@@ -24,7 +24,6 @@ import { IconCommand } from "@tabler/icons-react";
 import { IconCaretLeftFilled } from "@tabler/icons-react";
 import { IconCaretDownFilled } from "@tabler/icons-react";
 
-
 export const MacbookScroll = ({
   src,
   showGradient,
@@ -50,28 +49,26 @@ export const MacbookScroll = ({
     }
   }, []);
 
-  const scaleX = useTransform(
-    scrollYProgress,
-    [0, 0.3],
-    [1.2, isMobile ? 1 : 1.5],
-  );
-  const scaleY = useTransform(
-    scrollYProgress,
-    [0, 0.3],
-    [0.6, isMobile ? 1 : 1.5],
-  );
-  const translate = useTransform(scrollYProgress, [0, 1], [0, 1500]);
+  // ✅ Adjusted transforms for slightly larger but stable animation
+  const scaleX = useTransform(scrollYProgress, [0, 0.3], [1.25, isMobile ? 1.05 : 1.65]);
+  const scaleY = useTransform(scrollYProgress, [0, 0.3], [0.65, isMobile ? 1 : 1.55]);
+  const translate = useTransform(scrollYProgress, [0, 1], [0, 1550]);
   const rotate = useTransform(scrollYProgress, [0.1, 0.12, 0.3], [-28, -28, 0]);
   const textTransform = useTransform(scrollYProgress, [0, 0.3], [0, 100]);
   const textOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
 
   return (
- <div
-  ref={ref}
- className="pt-10 md:pt-40 flex h-auto min-h-0 shrink-0 scale-75 sm:scale-90 md:scale-100 transform flex-col items-center justify-center md:justify-start [perspective:800px] md:pb-20"
-
->
-
+    <div
+      ref={ref}
+      className="
+        pt-10 md:pt-40 
+        flex h-auto min-h-0 shrink-0 
+        scale-90 sm:scale-100 md:scale-[1.1]
+        transform flex-col items-center justify-center md:justify-start 
+        [perspective:800px] md:pb-24
+      "
+    >
+      {/* Optional animated title */}
       <motion.h2
         style={{
           translateY: textTransform,
@@ -79,9 +76,10 @@ export const MacbookScroll = ({
         }}
         className="mb-20 text-center text-3xl font-bold text-neutral-800 dark:text-white"
       >
-      
+        {title}
       </motion.h2>
-      {/* Lid */}
+
+      {/* === Macbook Lid === */}
       <Lid
         src={src}
         scaleX={scaleX}
@@ -89,12 +87,23 @@ export const MacbookScroll = ({
         rotate={rotate}
         translate={translate}
       />
-      {/* Base area */}
-      <div className="relative -z-10 h-[22rem] w-[32rem] overflow-hidden rounded-2xl bg-gray-200 dark:bg-[#272729]">
-        {/* above keyboard bar */}
+
+      {/* === Base Area === */}
+      <div
+        className="
+          relative -z-10 
+          h-[24rem] w-[36rem] 
+          overflow-hidden rounded-2xl 
+          bg-gray-200 dark:bg-[#272729] 
+          transition-all duration-700 ease-in-out
+        "
+      >
+        {/* Top Bar */}
         <div className="relative h-10 w-full">
           <div className="absolute inset-x-0 mx-auto h-4 w-[80%] bg-[#050505]" />
         </div>
+
+        {/* Keyboard Section */}
         <div className="relative flex">
           <div className="mx-auto h-full w-[10%] overflow-hidden">
             <SpeakerGrid />
@@ -106,8 +115,13 @@ export const MacbookScroll = ({
             <SpeakerGrid />
           </div>
         </div>
+
         <Trackpad />
+
+        {/* Bottom Bar */}
         <div className="absolute inset-x-0 bottom-0 mx-auto h-2 w-20 rounded-tl-3xl rounded-tr-3xl bg-gradient-to-t from-[#272729] to-[#050505]" />
+
+        {/* Optional Overlay Effects */}
         {showGradient && (
           <div className="absolute inset-x-0 bottom-0 z-50 h-40 w-full bg-gradient-to-t from-white via-white to-transparent dark:from-black dark:via-black"></div>
         )}
@@ -116,6 +130,7 @@ export const MacbookScroll = ({
     </div>
   );
 };
+
 
 export const Lid = ({
   scaleX,

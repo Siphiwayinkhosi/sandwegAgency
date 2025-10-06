@@ -139,7 +139,7 @@ const Hero = () => {
             whileTap={{ scale: 0.95 }}
             className="border border-gray-400 px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm tracking-wide hover:bg-white hover:text-black transition w-full"
           >
-            Sprit mit uns →
+            Join our momentum →
           </motion.button>
         </div>
       </div>
