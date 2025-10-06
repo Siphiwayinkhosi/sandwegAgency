@@ -7,7 +7,7 @@ const Platz = () => {
     <section className="w-full bg-black text-center text-white py-10 font-raleway">
       {/* Top text - hidden on mobile */}
       <h2 className="hidden sm:block text-xl md:text-5xl font-semibold mb-6">
-        Besuch uns im Sony Center am Potsdamer Platz in Berlin
+     Visit our office in Berlin at Potsdamer Platz
       </h2>
 
       {/* Video wrapper */}
@@ -38,8 +38,8 @@ const Platz = () => {
         {/* Toggle text - hidden on mobile */}
         <p className="hidden sm:block text-sm text-gray-400 mt-2">
           {expanded
-            ? "Klicken Sie, um zu minimieren"
-            : "Klicken Sie, um zu erweitern"}
+            ? "Click to minimize"
+            : "Click to expand"}
         </p>
       </div>
     </section>

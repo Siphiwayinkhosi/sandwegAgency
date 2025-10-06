@@ -13,8 +13,9 @@ const Index = () => {
       <Hero />
       <MacbookScrollDemo />
       <Services />
-      <Platz />
+     
       <Faq/>
+       <Platz />
       <Contact/>
       <Footer />   {/* ✅ now using your Footer.tsx */}
     </div>
