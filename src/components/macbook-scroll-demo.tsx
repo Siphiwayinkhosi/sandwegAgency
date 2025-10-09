@@ -55,7 +55,7 @@ export default function MacbookScrollDemo() {
       </motion.div>
 
       {/* ===== Spacer Below to Give Room for Animation ===== */}
-      <div className="h-[30vh] sm:h-[40vh]" />
+      <div className="h-[80vh] sm:h-[100vh]" />
     </section>
   );
 }
