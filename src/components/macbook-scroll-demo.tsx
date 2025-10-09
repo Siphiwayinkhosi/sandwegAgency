@@ -15,7 +15,7 @@ export default function MacbookScrollDemo() {
   };
 
   return (
-    <section className="relative w-full bg-black overflow-hidden min-h-screen flex flex-col items-center justify-center">
+    <section className="relative w-full bg-black overflow-hidden min-h-screen flex flex-col items-center    ">
       {/* ===== Laptop Section ===== */}
       <motion.div
         initial={{ opacity: 0, y: 60 }}
