@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import Contact from "./Contact"; // 👈 import your existing contact form
 
 const Hero = () => {
   const [language, setLanguage] = useState("EN");
+  const [showContact, setShowContact] = useState(false); // 👈 state to toggle form
 
   const containerRef = useRef(null);
   const leftColRef = useRef(null);
@@ -113,30 +115,11 @@ const Hero = () => {
         </motion.div>
 
         <div className="flex flex-col items-start gap-2 sm:gap-3 w-max">
-          {/* Language selector
-          <div className="flex border border-gray-500 rounded-full overflow-hidden text-xs sm:text-sm w-full">
-            <button
-              onClick={() => setLanguage("DE")}
-              className={`px-3 sm:px-4 py-1 transition w-1/2 ${
-                language === "DE" ? "bg-white text-black" : "text-white"
-              }`}
-            >
-              GERMAN
-            </button>
-            <button
-              onClick={() => setLanguage("EN")}
-              className={`px-3 sm:px-4 py-1 transition w-1/2 ${
-                language === "EN" ? "bg-white text-black" : "text-white"
-              }`}
-            >
-              ENGLISH
-            </button>
-          </div> */}
-
           {/* CTA */}
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            onClick={() => setShowContact(true)} // 👈 opens contact form
             className="border border-gray-400 px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm tracking-wide hover:bg-white hover:text-black transition w-full"
           >
             Join our momentum →
@@ -201,7 +184,7 @@ const Hero = () => {
           transition={{ duration: 2.0, ease: "easeInOut" }}
         />
 
-        {/* Dots (slower, synced with words) */}
+        {/* Dots */}
         {pos.centers.map((c, i) => (
           <motion.div
             key={i}
@@ -213,7 +196,7 @@ const Hero = () => {
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{
-              delay: 0.8 + i * 0.6, // stretched timing to stay in sync
+              delay: 0.8 + i * 0.6,
               duration: 1.6,
               type: "spring",
               stiffness: 250,
@@ -224,6 +207,37 @@ const Hero = () => {
           </motion.div>
         ))}
       </div>
+
+      {/* ✅ Contact Form Overlay */}
+      <AnimatePresence>
+        {showContact && (
+          <motion.div
+            className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 30 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+              className="relative w-[95%] max-w-3xl bg-white rounded-2xl shadow-2xl overflow-hidden"
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => setShowContact(false)}
+                className="absolute top-4 right-5 text-orange-600 text-2xl hover:text-white z-10"
+              >
+                ✕
+              </button>
+
+              {/* Existing Contact Form Component */}
+              <Contact />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

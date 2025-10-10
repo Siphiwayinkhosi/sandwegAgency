@@ -1,9 +1,18 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { MacbookScroll } from "@/components/ui/macbook-scroll";
 
 export default function MacbookScrollDemo() {
   const videoRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Detect mobile screen width
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize(); // Run on mount
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleScrollEnd = () => {
     if (videoRef.current) {
@@ -15,7 +24,12 @@ export default function MacbookScrollDemo() {
   };
 
   return (
-    <section className="relative w-full bg-black overflow-hidden min-h-screen flex flex-col items-center    ">
+    <section
+      className="relative w-full bg-black overflow-hidden min-h-screen flex flex-col items-center sm:mt-0"
+      style={{
+        marginTop: isMobile ? "-80px" : "0px", // 👈 Only apply upward shift on mobile
+      }}
+    >
       {/* ===== Laptop Section ===== */}
       <motion.div
         initial={{ opacity: 0, y: 60 }}
@@ -54,7 +68,7 @@ export default function MacbookScrollDemo() {
         </div>
       </motion.div>
 
-      {/* ===== Spacer Below to Give Room for Animation ===== */}
+      {/* ===== Spacer Below ===== */}
       <div className="h-[80vh] sm:h-[100vh]" />
     </section>
   );
