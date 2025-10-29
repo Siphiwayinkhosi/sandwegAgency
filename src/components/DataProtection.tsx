@@ -1,4 +1,4 @@
-// DataProtection.tsx
+
 import React, { useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -29,13 +29,12 @@ const panelVariants = {
 };
 
 const DataProtection: React.FC<DataProtectionProps> = ({ open, onClose }) => {
-  const firstFocusRef = useRef<HTMLButtonElement>(null);
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
 
-  // Lock page scroll & focus the close button when open
   useEffect(() => {
     if (open) {
       document.documentElement.style.overflow = "hidden";
-      setTimeout(() => firstFocusRef.current?.focus(), 50);
+      setTimeout(() => closeBtnRef.current?.focus(), 50);
     } else {
       document.documentElement.style.overflow = "";
     }
@@ -44,12 +43,9 @@ const DataProtection: React.FC<DataProtectionProps> = ({ open, onClose }) => {
     };
   }, [open]);
 
-  // Close with ESC
   useEffect(() => {
     if (!open) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [open, onClose]);
@@ -71,225 +67,209 @@ const DataProtection: React.FC<DataProtectionProps> = ({ open, onClose }) => {
           >
             {/* Header */}
             <div className="sticky top-0 z-10 flex items-center justify-between border-b border-white/10 bg-neutral-950/80 px-6 py-4 backdrop-blur">
-              <div className="flex min-w-0 flex-col">
-                <span className="text-[10px] uppercase tracking-[0.25em] text-orange-400">
-                  Sandweg Branding & Marketing UG
-                </span>
-                <h2 className="truncate text-lg font-semibold">
-                  Privacy Policy (Data Protection)
-                </h2>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <button
-                  ref={firstFocusRef}
-                  onClick={onClose}
-                  className="rounded-full border border-white/10 px-3 py-1.5 text-sm text-white/90 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                >
-                  Close
-                </button>
-              </div>
+              <h2 className="text-lg font-semibold tracking-wide text-white">
+                Privacy Policy (Data Protection)
+              </h2>
+              <button
+                ref={closeBtnRef}
+                onClick={onClose}
+                className="rounded-full border border-orange-500 px-3 py-1.5 text-sm text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-orange-500"
+              >
+                ✕
+              </button>
             </div>
 
             {/* Content */}
-            <div className="h-[calc(100%-64px)] overflow-y-auto px-6 py-6">
-              <div className="prose prose-invert max-w-none">
-                <p className="mb-6 text-sm text-white/60">
-                  Effective Date: <span className="text-white">May 2025</span>
-                </p>
+            <div className="h-[calc(100%-64px)] overflow-y-auto px-6 py-8">
+              <div className="space-y-10 text-base text-white/80 leading-relaxed">
+                {/* Section 1 */}
+                <section>
+                  <p className="text-sm text-white/60 mb-2">
+                    Effective Date: <span className="text-white">November 2025</span>
+                  </p>
+                  <h3 className="text-xl font-semibold text-white mb-3">
+                    1. General Information
+                  </h3>
+                  <p>
+                    This website is intended exclusively for business customers
+                    as defined in §14 of the German Civil Code (BGB). The
+                    following information provides an overview of what happens
+                    to your personal data when you visit this website.
+                  </p>
+                  <p>
+                    Personal data refers to any information that can be used to identify you personally.
+                    Detailed information is available in the sections below.
+                  </p>
+                </section>
 
-                <h3 className="mt-0 text-orange-400">1. General Information</h3>
-                <p>
-                  This website is intended exclusively for business customers as
-                  defined in §14 of the German Civil Code (BGB).
-                </p>
-                <p>
-                  The following information provides an overview of what happens
-                  to your personal data when you visit this website. Personal
-                  data refers to any information that can be used to identify
-                  you personally. Detailed explanations can be found in the
-                  sections below.
-                </p>
+                {/* Section 2 */}
+                <section>
+                  <h3 className="text-xl font-semibold text-white mb-3">
+                    2. Data Controller
+                  </h3>
+                  <p>
+                    <strong>Sandweg Branding & Marketing</strong>
+                    <br />
+                    Kemperplatz 1, 10785 Berlin  (Germany) || Sdvwashini industrial site, Mbabane (Eswatini)
+                    <br />
+                    Email:{" "}
+                    <a
+                      href="mailto:info@go-sandweg.com"
+                      className="underline underline-offset-4 decoration-white/30 hover:decoration-white"
+                    >
+                      info@go-sandweg.com
+                    </a>
+                    <br />
+                    Phone: +49 (0) 172 6822097  || (+268) 78011887
+                  </p>
+                </section>
 
-                <h3 className="text-orange-400">2. Data Controller</h3>
-                <p>The entity responsible for data processing on this website is:</p>
-                <p>
-                  <strong>
-                    Sandweg Branding & Marketing UG (haftungsbeschränkt)
-                  </strong>
-                  <br />
-                  Kemperplatz 1, 10785 Berlin
-                  <br />
-                  Email:{" "}
-                  <a
-                    href="mailto:info@go-sandweg.com"
-                    className="text-orange-400 underline decoration-orange-500/40 underline-offset-4 hover:decoration-orange-400"
-                  >
-                    info@go-sandweg.com
-                  </a>
-                  <br />
-                  Phone: +49 (0) 172 6822097
-                </p>
+                {/* Section 3 */}
+                <section>
+                  <h3 className="text-xl font-semibold text-white mb-3">
+                    3. Data Collection on This Website
+                  </h3>
+                  <h4 className="font-semibold text-white mb-1">
+                    How do we collect your data?
+                  </h4>
+                  <ul className="list-disc list-inside space-y-1">
+                    <li>Through voluntary input (e.g., contact forms).</li>
+                    <li>
+                      Automatically via technical processes (e.g., browser type,
+                      OS, access time).
+                    </li>
+                  </ul>
 
-                <h3 className="text-orange-400">3. Data Collection on This Website</h3>
-                <h4 className="mb-1">How do we collect your data?</h4>
-                <ul>
-                  <li>You provide it voluntarily (e.g., via contact forms).</li>
-                  <li>
-                    It is automatically collected through technical processes
-                    (e.g., browser type, operating system, access time).
-                  </li>
-                </ul>
+                  <h4 className="font-semibold text-white mt-4 mb-1">
+                    Why do we use your data?
+                  </h4>
+                  <ul className="list-disc list-inside space-y-1">
+                    <li>Ensure the website runs properly.</li>
+                    <li>Analyze usage behavior.</li>
+                    <li>Respond to inquiries and manage projects.</li>
+                    <li>Conduct marketing and follow-up communication.</li>
+                  </ul>
 
-                <h4 className="mb-1">Why do we use your data?</h4>
-                <ul>
-                  <li>Ensure the website operates without errors.</li>
-                  <li>Analyze user behavior.</li>
-                  <li>Communicate with customers and process orders.</li>
-                  <li>Conduct remarketing and follow-up activities.</li>
-                </ul>
+                  <h4 className="font-semibold text-white mt-4 mb-1">
+                    Your rights under GDPR
+                  </h4>
+                  <ul className="list-disc list-inside space-y-1">
+                    <li>Access, rectification, deletion, restriction of processing</li>
+                    <li>Withdraw consent at any time</li>
+                    <li>Object to processing (Art. 21 GDPR)</li>
+                    <li>File a complaint with a supervisory authority</li>
+                  </ul>
+                </section>
 
-                <h4 className="mb-1">What are your rights?</h4>
-                <ul>
-                  <li>
-                    Access, correction, deletion, or restriction of processing.
-                  </li>
-                  <li>The right to withdraw consent.</li>
-                  <li>
-                    The right to object to certain processing (Art. 21 GDPR).
-                  </li>
-                  <li>
-                    The right to lodge a complaint with a supervisory authority.
-                  </li>
-                </ul>
+               
 
-                <h3 className="text-orange-400">
-                  4. Hosting & Third-Party Services
-                </h3>
-                <p>
-                  This website is hosted by <strong>Wix.com Ltd.</strong> Data
-                  processing may also take place on servers outside the EU, such
-                  as in the USA. Wix relies on Standard Contractual Clauses in
-                  accordance with Art. 46 GDPR. (More information: Wix Privacy
-                  Policy)
-                </p>
-                <p>Additional third-party services used:</p>
-                <ul>
-                  <li>Google Analytics &amp; Google Ads (including remarketing and conversion tracking)</li>
-                  <li>Meta (Facebook Pixel &amp; Custom Audiences)</li>
-                  <li>Usercentrics (cookie consent management)</li>
-                  <li>Stripe (payment processing)</li>
-                </ul>
-                <p>
-                  Data processing agreements (DPAs) have been concluded with all
-                  third-party providers.
-                </p>
+                {/* Section 5 */}
+                <section>
+                  <h3 className="text-xl font-semibold text-white mb-3">
+                    4. Cookies & Consent
+                  </h3>
+                  <p>
+                    Cookies are stored only if technically necessary or with your explicit consent.
+                  </p>
+                  <ul className="list-disc list-inside space-y-1">
+                    <li>
+                      Technically necessary – Art. 6 para. 1 lit. f GDPR
+                    </li>
+                    <li>
+                      With consent – Art. 6 para. 1 lit. a GDPR in conjunction with §25 TTDSG
+                    </li>
+                  </ul>
+                  <p className="mt-2">
+                    Consent is managed through Usercentrics and can be withdrawn at any time.
+                  </p>
+                </section>
 
-                <h3 className="text-orange-400">5. Cookies & Consent</h3>
-                <p>
-                  When visiting this website, cookies are used. Cookies are only
-                  stored if:
-                </p>
-                <ul>
-                  <li>
-                    They are technically necessary (Art. 6 para. 1 lit. f GDPR), or
-                  </li>
-                  <li>
-                    You have given your consent (Art. 6 para. 1 lit. a GDPR in
-                    conjunction with §25 TTDSG).
-                  </li>
-                </ul>
-                <p>
-                  Consent for cookies is managed via Usercentrics. You can
-                  withdraw or adjust your preferences at any time. For details
-                  on cookie usage, visit: Wix Cookie Policy.
-                </p>
+                {/* Section 6-12 simplified but tidy */}
+                <section>
+                  <h3 className="text-xl font-semibold text-white mb-3">
+                    5. Contact & Communication
+                  </h3>
+                  <p>
+                    When contacting us (via form, email or phone), data is processed based on:
+                  </p>
+                  <ul className="list-disc list-inside space-y-1">
+                    <li>Contractual needs (Art. 6 para. 1 lit. b GDPR)</li>
+                    <li>Legitimate interest (Art. 6 para. 1 lit. f GDPR)</li>
+                    <li>Consent (Art. 6 para. 1 lit. a GDPR)</li>
+                  </ul>
+                </section>
 
-                <h3 className="text-orange-400">6. Contact & Communication</h3>
-                <p>
-                  When you contact us via form, email, or phone, we store your
-                  information to process your request. Data is processed:
-                </p>
-                <ul>
-                  <li>
-                    Under Art. 6 para. 1 lit. b GDPR (pre-contractual or
-                    contractual obligations),
-                  </li>
-                  <li>
-                    Based on legitimate interests (Art. 6 para. 1 lit. f GDPR), or
-                  </li>
-                  <li>With your consent (Art. 6 para. 1 lit. a GDPR).</li>
-                </ul>
+                <section>
+                  <h3 className="text-xl font-semibold text-white mb-3">
+                    6. Newsletter & Marketing Automation
+                  </h3>
+                  <p>
+                    Subscriptions and marketing activities occur only with your explicit consent (Art. 6 para. 1 lit. a GDPR). You may unsubscribe at any time.
+                  </p>
+                </section>
 
-                <h3 className="text-orange-400">
-                  7. Newsletter & Marketing Automation
-                </h3>
-                <p>
-                  If you subscribe to our newsletter or opt into our marketing
-                  automation (e.g., after contacting us), we use your data for
-                  personalized communication. Processing is carried out only
-                  with your explicit consent in accordance with Art. 6 para. 1
-                  lit. a GDPR. You can unsubscribe at any time.
-                </p>
+                <section>
+                  <h3 className="text-xl font-semibold text-white mb-3">
+                    7. Remarketing & Advertising
+                  </h3>
+                  <ul className="list-disc list-inside space-y-1">
+                    <li>Google and Meta Remarketing</li>
+                    <li>Lookalike Audiences</li>
+                    <li>Cross-device ads</li>
+                  </ul>
+                  <p className="mt-2">
+                    Based on legitimate interest or consent (Art. 6 para. 1 lit. a/f GDPR).
+                  </p>
+                </section>
 
-                <h3 className="text-orange-400">8. Remarketing & Advertising</h3>
-                <p>We may use your data for:</p>
-                <ul>
-                  <li>Remarketing (Google, Meta)</li>
-                  <li>Lookalike or Custom Audiences</li>
-                  <li>Cross-device advertising</li>
-                </ul>
-                <p>
-                  Processing is based on legitimate interests (Art. 6 para. 1
-                  lit. f GDPR) or your consent (Art. 6 para. 1 lit. a GDPR).
-                  You may withdraw your consent at any time.
-                </p>
+                <section>
+                  <h3 className="text-xl font-semibold text-white mb-3">
+                    8. Internal Analytics & References
+                  </h3>
+                  <p>
+                    Anonymous data is used to improve our services. Projects may appear as anonymized references (e.g. “Client from Hamburg”).
+                  </p>
+                </section>
 
-                <h3 className="text-orange-400">
-                  9. Internal Analytics & Reference Usage
-                </h3>
-                <p>
-                  We process anonymous data to improve our products and
-                  services. Project information may be used in anonymized form
-                  (e.g., “Coach from Hamburg”) as a reference on our website or
-                  materials.
-                </p>
+                <section>
+                  <h3 className="text-xl font-semibold text-white mb-3">
+                    9. Legal Basis & Data Retention
+                  </h3>
+                  <ul className="list-disc list-inside space-y-1">
+                    <li>Consent – Art. 6 (1)(a)</li>
+                    <li>Contract – Art. 6 (1)(b)</li>
+                    <li>Legal Obligation – Art. 6 (1)(c)</li>
+                    <li>Legitimate Interest – Art. 6 (1)(f)</li>
+                  </ul>
+                  <p className="mt-2">
+                    Data retention depends on purpose and legal requirements.
+                  </p>
+                </section>
 
-                <h3 className="text-orange-400">
-                  10. Legal Basis & Data Retention
-                </h3>
-                <p>The specific legal basis depends on the purpose of processing:</p>
-                <ul>
-                  <li>Art. 6 para. 1 lit. a – Consent</li>
-                  <li>Art. 6 para. 1 lit. b – Contract performance</li>
-                  <li>Art. 6 para. 1 lit. c – Legal obligation</li>
-                  <li>Art. 6 para. 1 lit. f – Legitimate interest</li>
-                </ul>
-                <p>
-                  Data retention is determined by the purpose of processing and
-                  applicable legal requirements.
-                </p>
+                <section>
+                  <h3 className="text-xl font-semibold text-white mb-3">
+                    10. Data Security
+                  </h3>
+                  <p>
+                    SSL encryption is used to secure data transmission and prevent unauthorized access.
+                  </p>
+                </section>
 
-                <h3 className="text-orange-400">11. Data Security</h3>
-                <p>
-                  This website uses SSL encryption to protect your data from
-                  unauthorized access during transmission.
-                </p>
+                <section>
+                  <h3 className="text-xl font-semibold text-white mb-3">
+                    11. Your Rights Summary
+                  </h3>
+                  <ul className="list-disc list-inside space-y-1">
+                    <li>Access / Correction / Deletion</li>
+                    <li>Data Portability</li>
+                    <li>Withdraw Consent</li>
+                    <li>Object to Processing (Art. 21 GDPR)</li>
+                    <li>File Complaint with Authority</li>
+                  </ul>
+                </section>
 
-                <h3 className="text-orange-400">12. Summary of Your Rights</h3>
-                <ul>
-                  <li>
-                    Access, correct, delete, or restrict processing of your data
-                  </li>
-                  <li>Data portability</li>
-                  <li>Withdraw your consent</li>
-                  <li>Object to certain processing (Art. 21 GDPR)</li>
-                  <li>File a complaint with a supervisory authority</li>
-                </ul>
-
-                <p className="mt-8 text-sm text-white/60">
-                  This Privacy Policy may be updated periodically. Please review
-                  it regularly for any changes.
+                <p className="text-sm text-white/60">
+                  This Privacy Policy may be updated periodically. Please review it regularly for changes.
                 </p>
               </div>
             </div>

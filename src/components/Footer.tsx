@@ -103,14 +103,14 @@ const Footer: React.FC = () => {
 
           <button
             onClick={() => setShowPolicy(true)}
-            className="text-orange-500 hover:text-orange-400 underline decoration-orange-500/40 underline-offset-4 transition"
+            className="text-gray-500 hover:text-orange-400 underline decoration-gray-500/40 underline-offset-4 transition"
           >
             Privacy Policy
           </button>
 
           <button
             onClick={() => setShowImprint(true)}
-            className="text-orange-500 hover:text-orange-400 underline decoration-orange-500/40 underline-offset-4 transition"
+            className="text-gray-500 hover:text-orange-400 underline decoration-gray-500/40 underline-offset-4 transition"
           >
             Imprint
           </button>
