@@ -1,4 +1,3 @@
-"use client";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { MotionValue, motion, useScroll, useTransform } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -25,6 +24,7 @@ import { IconCaretLeftFilled } from "@tabler/icons-react";
 import { IconCaretDownFilled } from "@tabler/icons-react";
 
 
+
 export const MacbookScroll = ({
   src,
   showGradient,
@@ -41,7 +41,7 @@ export const MacbookScroll = ({
     target: ref,
     offset: ["start start", "end -100%"],
   });
-
+  
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -168,6 +168,7 @@ export const Lid = ({
     {typeof src === "string" && src.endsWith(".mp4") ? (
       <video
         src={src}
+        
         autoPlay
         loop
         muted

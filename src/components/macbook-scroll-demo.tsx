@@ -1,75 +1,83 @@
 import React, { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { MacbookScroll } from "@/components/ui/macbook-scroll";
+import { Volume2, VolumeX } from "lucide-react";
 
 export default function MacbookScrollDemo() {
-  const videoRef = useRef(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [muted, setMuted] = useState(true);
+  const [videoEl, setVideoEl] = useState<HTMLVideoElement | null>(null);
 
   useEffect(() => {
-    // Detect mobile screen width
     const handleResize = () => setIsMobile(window.innerWidth < 768);
-    handleResize(); // Run on mount
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const handleScrollEnd = () => {
-    if (videoRef.current) {
-      videoRef.current.muted = false;
-      videoRef.current.play().catch((error) => {
-        console.error("Video play failed:", error);
-      });
+  // 🔥 Force-detect actual video inside MacbookScroll
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const foundVideo = document.querySelector("video");
+      if (foundVideo) {
+        (foundVideo as HTMLVideoElement).muted = true;
+        setVideoEl(foundVideo as HTMLVideoElement);
+      }
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const toggleMute = () => {
+    if (videoEl) {
+      const newMuted = !muted;
+      videoEl.muted = newMuted;
+      videoEl.volume = newMuted ? 0 : 1;
+      setMuted(newMuted);
+    } else {
+      console.warn("Video element not found yet.");
     }
   };
 
   return (
     <section
       className="relative w-full bg-black overflow-hidden min-h-screen flex flex-col items-center sm:mt-0"
-      style={{
-        marginTop: isMobile ? "-80px" : "0px", // 👈 Only apply upward shift on mobile
-      }}
+      style={{ marginTop: isMobile ? "-80px" : "0px" }}
     >
       {/* ===== Laptop Section ===== */}
       <motion.div
         initial={{ opacity: 0, y: 60 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.4, delay: 1.8, ease: "easeOut" }}
+        transition={{ duration: 1.4, delay: 1.2, ease: "easeOut" }}
         className="relative w-full flex justify-center mb-16 sm:mb-20 px-4"
       >
         <div
-          className="
-            scale-[0.95] sm:scale-100 
-            md:scale-[1.25] lg:scale-[1.35] 
-            xl:scale-[1.4]
-            2xl:scale-[1.45]
-            transform origin-center transition-transform duration-700 ease-out
-            max-w-[95vw] md:max-w-[90vw] lg:max-w-[85vw]
-          "
+          className="scale-[0.95] sm:scale-100 
+                     md:scale-[1.25] lg:scale-[1.35] xl:scale-[1.4] 2xl:scale-[1.45]
+                     transform origin-center transition-transform duration-700 ease-out
+                     max-w-[95vw] md:max-w-[90vw] lg:max-w-[85vw] relative"
         >
-          <MacbookScroll
-            src="/video.mp4"
-            showGradient={false}
-            ref={videoRef}
-            onScrollEnd={handleScrollEnd}
-          />
+          <MacbookScroll src="/video.mp4" showGradient={false} />
+
+          {/* ✅ Sound Toggle Button */}
+          <button
+            onClick={toggleMute}
+            className="z-50 absolute bottom-20 right-6 bg-white/20 hover:bg-white/30 
+                       text-white backdrop-blur-md rounded-full p-4 shadow-lg 
+                       transition-all duration-300 cursor-pointer select-none"
+            style={{ pointerEvents: "auto" }}
+          >
+            {muted ? (
+              <VolumeX className="w-6 h-6" />
+            ) : (
+              <Volume2 className="w-6 h-6 text-orange-500" />
+            )}
+          </button>
         </div>
       </motion.div>
 
-      {/* ===== Below Text / Spacer Section ===== */}
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.2, delay: 2.4, ease: "easeOut" }}
-        className="relative max-w-5xl text-center px-6 sm:px-10"
-      >
-        <div className="relative inline-block px-6 py-4 sm:px-10 sm:py-6 rounded-xl">
-          {/* Optional content below the laptop */}
-        </div>
-      </motion.div>
-
-      {/* ===== Spacer Below ===== */}
+      {/* ===== Spacer Section ===== */}
       <div className="h-[80vh] sm:h-[100vh]" />
     </section>
   );
 }
+

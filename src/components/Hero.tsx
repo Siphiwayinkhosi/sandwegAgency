@@ -1,17 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Contact from "./Contact"; // 👈 import your existing contact form
+import ContactPanel from "./ContactPanel"; // ✅ must exist in same folder
 
 const Hero = () => {
-  const [language, setLanguage] = useState("EN");
-  const [showContact, setShowContact] = useState(false); // 👈 state to toggle form
+  const [showContact, setShowContact] = useState(false); // controls popup
 
   const containerRef = useRef(null);
   const leftColRef = useRef(null);
   const line1Ref = useRef(null);
   const line2Ref = useRef(null);
   const line3Ref = useRef(null);
-
   const runMeasureRef = useRef(() => {});
   const [pos, setPos] = useState({
     left: 60,
@@ -92,11 +90,12 @@ const Hero = () => {
         backgroundPosition: "center",
       }}
     >
-      {/* overlay */}
+      {/* Background overlay */}
       <div className="absolute inset-0 bg-black/70 z-0" />
 
       {/* Top bar */}
       <div className="relative z-10 flex justify-between items-center px-4 sm:px-10 py-4 sm:py-6">
+        {/* Logo + Text */}
         <motion.div
           className="flex items-center gap-3 sm:gap-6"
           initial={{ opacity: 0, x: -30 }}
@@ -114,17 +113,15 @@ const Hero = () => {
           </div>
         </motion.div>
 
-        <div className="flex flex-col items-start gap-2 sm:gap-3 w-max">
-          {/* CTA */}
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setShowContact(true)} // 👈 opens contact form
-            className="border border-gray-400 px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm tracking-wide hover:bg-white hover:text-black transition w-full"
-          >
-            Join our momentum →
-          </motion.button>
-        </div>
+        {/* CTA – opens contact instantly */}
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => setShowContact(true)}
+          className="border border-gray-400 px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm tracking-wide hover:bg-white hover:text-black transition"
+        >
+          Join our momentum →
+        </motion.button>
       </div>
 
       {/* Hero content */}
@@ -135,7 +132,6 @@ const Hero = () => {
         <div ref={leftColRef} className="w-6 sm:w-12 mr-3 sm:mr-6 flex-shrink-0" />
 
         <div className="flex flex-col justify-center leading-tight space-y-4 sm:space-y-6">
-          {/* DESIGN */}
           <motion.div
             ref={line1Ref}
             className="uppercase tracking-[0.15em] sm:tracking-[0.35em] text-3xl sm:text-5xl md:text-8xl font-semibold"
@@ -146,7 +142,6 @@ const Hero = () => {
             DESIGN
           </motion.div>
 
-          {/* MEETS */}
           <motion.div
             ref={line2Ref}
             className="uppercase tracking-[0.15em] sm:tracking-[0.35em] text-3xl sm:text-5xl md:text-8xl font-semibold"
@@ -157,7 +152,6 @@ const Hero = () => {
             MEETS
           </motion.div>
 
-          {/* TECHNOLOGY */}
           <motion.div
             ref={line3Ref}
             className="uppercase tracking-[0.15em] sm:tracking-[0.35em] text-3xl sm:text-5xl md:text-8xl font-semibold"
@@ -169,7 +163,7 @@ const Hero = () => {
           </motion.div>
         </div>
 
-        {/* Line */}
+        {/* Orange line */}
         <motion.div
           className="absolute w-[1px] bg-orange-500 -translate-x-1/2 origin-top"
           style={{
@@ -184,7 +178,7 @@ const Hero = () => {
           transition={{ duration: 2.0, ease: "easeInOut" }}
         />
 
-        {/* Dots */}
+        {/* Orange dots */}
         {pos.centers.map((c, i) => (
           <motion.div
             key={i}
@@ -211,31 +205,10 @@ const Hero = () => {
       {/* ✅ Contact Form Overlay */}
       <AnimatePresence>
         {showContact && (
-          <motion.div
-            className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0, y: 30 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
-              className="relative w-[95%] max-w-3xl bg-white rounded-2xl shadow-2xl overflow-hidden"
-            >
-              {/* Close Button */}
-              <button
-                onClick={() => setShowContact(false)}
-                className="absolute top-4 right-5 text-orange-600 text-2xl hover:text-white z-10"
-              >
-                ✕
-              </button>
-
-              {/* Existing Contact Form Component */}
-              <Contact />
-            </motion.div>
-          </motion.div>
+          <ContactPanel
+            open={showContact}
+            onClose={() => setShowContact(false)}
+          />
         )}
       </AnimatePresence>
     </section>
@@ -243,3 +216,4 @@ const Hero = () => {
 };
 
 export default Hero;
+
