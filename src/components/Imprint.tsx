@@ -83,46 +83,50 @@ const Imprint: React.FC<ImprintProps> = ({ open, onClose }) => {
             {/* Content */}
             <div className="h-[calc(100%-64px)] overflow-y-auto px-6 py-8">
               <div className="space-y-10 text-base text-white/80 leading-relaxed">
-                {/* Germany Section */}
-                <div>
-                  <h3 className="text-2xl font-bold mb-4 text-white">
-                    Sandweg Branding & Marketing 
-                    
-                  </h3>
-                  <p>
-                    <strong>Address:</strong>
-                    <br />
-                    Kemperplatz 1<br />
-                    10785 Berlin<br />
-                    Germany
-                  </p>
-                  <p>
-                    <strong>Managing Director:</strong> Marcel Sandweg
-                    <br />
-                    <strong>VAT ID No.:</strong> DE 67839114204
-                  </p>
-                  <p>
-                    <strong>Email:</strong>{" "}
-                    <a
-                      href="mailto:info@go-sandweg.com"
-                      className="underline underline-offset-4 decoration-white/30 hover:decoration-white"
-                    >
-                      info@go-sandweg.com
-                    </a>
-                    <br />
-                    <strong>Website:</strong>{" "}
-                    <a
-                      href="https://www.go-sandweg.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="underline underline-offset-4 decoration-white/30 hover:decoration-white"
-                    >
-                      www.go-sandweg.com
-                    </a>
-                    <br />
-                    <strong>Phone:</strong> +49 30 41738874
-                  </p>
-                </div>
+               {/* Germany Section */}
+<div>
+  <h3 className="text-2xl font-bold mb-4 text-white">
+    Sandweg Branding & Marketing
+  </h3>
+  <p>
+    <strong>Address:</strong>
+    <br />
+    Kemperplatz 1<br />
+    10785 Berlin<br />
+    Germany
+  </p>
+  <p>
+    <strong>Managing Director:</strong> Marcel Sandweg
+    <br />
+    <strong>VAT ID No.:</strong> DE 67839114204
+    <br />
+    <strong>German trading number:</strong> HRB 275148
+    <br />
+    <strong>Place of court:</strong> Gerichtsstand Berlin Mitte
+  </p>
+  <p>
+    <strong>Email:</strong>{" "}
+    <a
+      href="mailto:info@go-sandweg.com"
+      className="underline underline-offset-4 decoration-white/30 hover:decoration-white"
+    >
+      info@go-sandweg.com
+    </a>
+    <br />
+    <strong>Website:</strong>{" "}
+    <a
+      href="https://www.go-sandweg.com"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="underline underline-offset-4 decoration-white/30 hover:decoration-white"
+    >
+      www.go-sandweg.com
+    </a>
+    <br />
+    <strong>Phone:</strong> +49 30 41738874
+  </p>
+</div>
+
 
                 {/* Eswatini Section */}
                 <div>
@@ -134,7 +138,7 @@ const Imprint: React.FC<ImprintProps> = ({ open, onClose }) => {
                     <br />
                     <strong>Office No:</strong> 8
                     <br />
-                    <strong>Location:</strong> Mbabane, Sdvwashini Industrial Site
+                    <strong>Location:</strong> Mbabane, Sdvwashini Industrial Site, Eswatini
                     <br />
                     <strong>P.O. BOX:</strong> D149
                     <br />

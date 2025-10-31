@@ -15,7 +15,7 @@ export default function MacbookScrollDemo() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // 🔥 Force-detect actual video inside MacbookScroll
+  // Detect the actual video inside MacbookScroll
   useEffect(() => {
     const timer = setTimeout(() => {
       const foundVideo = document.querySelector("video");
@@ -32,9 +32,16 @@ export default function MacbookScrollDemo() {
       const newMuted = !muted;
       videoEl.muted = newMuted;
       videoEl.volume = newMuted ? 0 : 1;
+
+      // ✅ Restart when sound is turned on
+      if (!newMuted) {
+        videoEl.currentTime = 0;
+        videoEl.play().catch((err) =>
+          console.warn("Playback failed to start:", err)
+        );
+      }
+
       setMuted(newMuted);
-    } else {
-      console.warn("Video element not found yet.");
     }
   };
 
@@ -48,7 +55,9 @@ export default function MacbookScrollDemo() {
         initial={{ opacity: 0, y: 60 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.4, delay: 1.2, ease: "easeOut" }}
-        className="relative w-full flex justify-center mb-16 sm:mb-20 px-4"
+        className={`relative w-full flex justify-center px-4 ${
+          isMobile ? "mb-0" : "mb-16 sm:mb-20"
+        }`}
       >
         <div
           className="scale-[0.95] sm:scale-100 
@@ -75,9 +84,8 @@ export default function MacbookScrollDemo() {
         </div>
       </motion.div>
 
-      {/* ===== Spacer Section ===== */}
-      <div className="h-[80vh] sm:h-[100vh]" />
+      {/* ===== Spacer Section — disable on mobile ===== */}
+      {!isMobile && <div className="h-[80vh] sm:h-[100vh]" />}
     </section>
   );
 }
-
