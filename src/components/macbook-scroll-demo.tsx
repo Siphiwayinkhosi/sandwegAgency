@@ -15,7 +15,7 @@ export default function MacbookScrollDemo() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Detect the actual video inside MacbookScroll
+  // Detect video element
   useEffect(() => {
     const timer = setTimeout(() => {
       const foundVideo = document.querySelector("video");
@@ -33,7 +33,7 @@ export default function MacbookScrollDemo() {
       videoEl.muted = newMuted;
       videoEl.volume = newMuted ? 0 : 1;
 
-      // ✅ Restart when sound is turned on
+      // Restart video when sound is turned on
       if (!newMuted) {
         videoEl.currentTime = 0;
         videoEl.play().catch((err) =>
@@ -47,17 +47,20 @@ export default function MacbookScrollDemo() {
 
   return (
     <section
-      className="relative w-full bg-black overflow-hidden min-h-screen flex flex-col items-center sm:mt-0"
-      style={{ marginTop: isMobile ? "-80px" : "0px" }}
+      className="relative w-full bg-black overflow-hidden flex flex-col items-center sm:mt-0"
+      style={{
+        marginTop: isMobile ? "-80px" : "0px",
+        minHeight: "100vh",
+        // 👇 this is the part that controls extra bottom space on mobile
+        paddingBottom: isMobile ? "40px" : "0px",
+      }}
     >
       {/* ===== Laptop Section ===== */}
       <motion.div
         initial={{ opacity: 0, y: 60 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.4, delay: 1.2, ease: "easeOut" }}
-        className={`relative w-full flex justify-center px-4 ${
-          isMobile ? "mb-0" : "mb-16 sm:mb-20"
-        }`}
+        className="relative w-full flex justify-center px-4 mb-0 sm:mb-20"
       >
         <div
           className="scale-[0.95] sm:scale-100 
@@ -84,7 +87,7 @@ export default function MacbookScrollDemo() {
         </div>
       </motion.div>
 
-      {/* ===== Spacer Section — disable on mobile ===== */}
+      {/* ===== Spacer Section (desktop only) ===== */}
       {!isMobile && <div className="h-[80vh] sm:h-[100vh]" />}
     </section>
   );
