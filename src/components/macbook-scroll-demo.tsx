@@ -15,7 +15,6 @@ export default function MacbookScrollDemo() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Detect video element
   useEffect(() => {
     const timer = setTimeout(() => {
       const foundVideo = document.querySelector("video");
@@ -33,7 +32,6 @@ export default function MacbookScrollDemo() {
       videoEl.muted = newMuted;
       videoEl.volume = newMuted ? 0 : 1;
 
-      // Restart video when sound is turned on
       if (!newMuted) {
         videoEl.currentTime = 0;
         videoEl.play().catch((err) =>
@@ -51,8 +49,8 @@ export default function MacbookScrollDemo() {
       style={{
         marginTop: isMobile ? "-80px" : "0px",
         minHeight: "100vh",
-        // 👇 this is the part that controls extra bottom space on mobile
-        paddingBottom: isMobile ? "40px" : "0px",
+        // 👇 add a bit more breathing room at the bottom only on mobile
+        paddingBottom: isMobile ? "120px" : "0px",
       }}
     >
       {/* ===== Laptop Section ===== */}
