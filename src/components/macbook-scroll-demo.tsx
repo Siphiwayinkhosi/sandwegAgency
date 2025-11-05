@@ -70,7 +70,7 @@ export default function MacbookScrollDemo() {
           {/* Sound Toggle */}
           <button
             onClick={toggleMute}
-            className="z-50 absolute bottom-14 right-4 bg-white/20 hover:bg-white/30 
+            className="z-50 absolute bottom-20 right-4 bg-white/20 hover:bg-white/30 
                        text-white backdrop-blur-md rounded-full p-3 shadow-lg 
                        transition-all duration-300 cursor-pointer select-none"
             style={{ pointerEvents: "auto" }}
