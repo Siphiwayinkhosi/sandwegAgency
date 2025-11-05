@@ -44,9 +44,9 @@ export default function MacbookScrollDemo() {
     <section
       className="relative w-full bg-black overflow-hidden flex flex-col items-center sm:mt-0"
       style={{
-        marginTop: "0px", // ✅ leave the top alone
+        // ✅ tighten top space on mobile only
+        marginTop: isMobile ? "-80px" : "0px",
         minHeight: "100vh",
-        // ✅ extra scroll space ONLY at the bottom on mobile
         paddingBottom: isMobile ? "200px" : "0px",
       }}
     >
@@ -55,6 +55,10 @@ export default function MacbookScrollDemo() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.3, delay: 1.1, ease: "easeOut" }}
         className="relative w-full flex justify-center px-3 sm:px-6 mb-0 sm:mb-20"
+        style={{
+          // ✅ pull laptop slightly higher only on mobile
+          marginTop: isMobile ? "-30px" : "0px",
+        }}
       >
         <div
           className="relative transform origin-center transition-transform duration-700 ease-out 
@@ -80,7 +84,7 @@ export default function MacbookScrollDemo() {
         </div>
       </motion.div>
 
-      {/* ✅ extra invisible space so the video finishes detaching before cut */}
+      {/* ✅ space below so video detaches fully */}
       {isMobile && <div className="h-[20vh]" />}
       {!isMobile && <div className="h-[80vh]" />}
     </section>
