@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { MacbookScroll } from "@/components/ui/macbook-scroll";
 import { Volume2, VolumeX } from "lucide-react";
@@ -22,56 +22,51 @@ export default function MacbookScrollDemo() {
         (foundVideo as HTMLVideoElement).muted = true;
         setVideoEl(foundVideo as HTMLVideoElement);
       }
-    }, 1000);
+    }, 800);
     return () => clearTimeout(timer);
   }, []);
 
   const toggleMute = () => {
-    if (videoEl) {
-      const newMuted = !muted;
-      videoEl.muted = newMuted;
-      videoEl.volume = newMuted ? 0 : 1;
-
-      if (!newMuted) {
-        videoEl.currentTime = 0;
-        videoEl.play().catch((err) =>
-          console.warn("Playback failed to start:", err)
-        );
-      }
-
-      setMuted(newMuted);
+    if (!videoEl) return;
+    const newMuted = !muted;
+    videoEl.muted = newMuted;
+    videoEl.volume = newMuted ? 0 : 1;
+    if (!newMuted) {
+      videoEl.currentTime = 0;
+      videoEl.play().catch((err) =>
+        console.warn("Playback failed to start:", err)
+      );
     }
+    setMuted(newMuted);
   };
 
   return (
     <section
-      className="relative w-full bg-black overflow-hidden flex flex-col items-center"
+      className="relative w-full bg-black overflow-hidden flex flex-col items-center sm:mt-0"
       style={{
-        marginTop: isMobile ? "-60px" : "0px",
-        minHeight: isMobile ? "110vh" : "100vh",
-        paddingBottom: isMobile ? "60px" : "0px",
+        marginTop: "0px", // ✅ leave the top alone
+        minHeight: "100vh",
+        // ✅ extra scroll space ONLY at the bottom on mobile
+        paddingBottom: isMobile ? "200px" : "0px",
       }}
     >
-      {/* ===== Video Section ===== */}
       <motion.div
         initial={{ opacity: 0, y: 60 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.4, delay: 1.2, ease: "easeOut" }}
-        className="relative w-full flex justify-center px-2 sm:px-4 mb-0 sm:mb-20"
+        transition={{ duration: 1.3, delay: 1.1, ease: "easeOut" }}
+        className="relative w-full flex justify-center px-3 sm:px-6 mb-0 sm:mb-20"
       >
         <div
-          className={`relative transform origin-center transition-transform duration-700 ease-out
-                      ${isMobile ? "scale-[1.05]" : "md:scale-[1.3] lg:scale-[1.4] xl:scale-[1.45]"}`}
-          style={{
-            maxWidth: isMobile ? "98vw" : "85vw",
-          }}
+          className="relative transform origin-center transition-transform duration-700 ease-out 
+                     scale-[0.95] sm:scale-[1] md:scale-[1.25] lg:scale-[1.35] xl:scale-[1.4]"
+          style={{ maxWidth: "90vw" }}
         >
           <MacbookScroll src="/video.mp4" showGradient={false} />
 
-          {/* ✅ Sound Toggle Button */}
+          {/* Sound Toggle */}
           <button
             onClick={toggleMute}
-            className="z-50 absolute bottom-16 right-4 bg-white/20 hover:bg-white/30 
+            className="z-50 absolute bottom-14 right-4 bg-white/20 hover:bg-white/30 
                        text-white backdrop-blur-md rounded-full p-3 shadow-lg 
                        transition-all duration-300 cursor-pointer select-none"
             style={{ pointerEvents: "auto" }}
@@ -85,8 +80,10 @@ export default function MacbookScrollDemo() {
         </div>
       </motion.div>
 
-      {/* ===== Spacer Section (desktop only) ===== */}
+      {/* ✅ extra invisible space so the video finishes detaching before cut */}
+      {isMobile && <div className="h-[20vh]" />}
       {!isMobile && <div className="h-[80vh]" />}
     </section>
   );
 }
+
