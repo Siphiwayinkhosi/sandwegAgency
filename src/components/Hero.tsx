@@ -1,15 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import ContactPanel from "./ContactPanel"; // ✅ must exist in same folder
+import ContactPanel from "./ContactPanel"; // must exist
 
 const Hero = () => {
-  const [showContact, setShowContact] = useState(false); // controls popup
+  const [showContact, setShowContact] = useState(false);
 
   const containerRef = useRef(null);
   const leftColRef = useRef(null);
   const line1Ref = useRef(null);
   const line2Ref = useRef(null);
   const line3Ref = useRef(null);
+
   const runMeasureRef = useRef(() => {});
   const [pos, setPos] = useState({
     left: 60,
@@ -90,10 +91,10 @@ const Hero = () => {
         backgroundPosition: "center",
       }}
     >
-      {/* Background overlay */}
+      {/* Overlay */}
       <div className="absolute inset-0 bg-black/70 z-0" />
 
-      {/* Top bar */}
+      {/* Top Bar */}
       <div className="relative z-10 flex justify-between items-center px-4 sm:px-10 py-4 sm:py-6">
         {/* Logo + Text */}
         <motion.div
@@ -113,7 +114,7 @@ const Hero = () => {
           </div>
         </motion.div>
 
-        {/* CTA – opens contact instantly */}
+        {/* CTA */}
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -124,10 +125,15 @@ const Hero = () => {
         </motion.button>
       </div>
 
-      {/* Hero content */}
+      {/* 🔥 RESPONSIVE HERO FIX APPLIED HERE */}
       <div
         ref={containerRef}
-        className="relative z-10 flex items-center px-4 sm:px-10 mt-20 sm:mt-20 h-auto sm:h-[calc(100%-120px)]"
+        className="
+          relative z-10 flex items-center
+          px-4 sm:px-10 
+          h-[90vh] sm:h-[calc(100%-120px)]
+          mt-10 sm:mt-20
+        "
       >
         <div ref={leftColRef} className="w-6 sm:w-12 mr-3 sm:mr-6 flex-shrink-0" />
 
@@ -163,7 +169,7 @@ const Hero = () => {
           </motion.div>
         </div>
 
-        {/* Orange line */}
+        {/* Orange Line */}
         <motion.div
           className="absolute w-[1px] bg-orange-500 -translate-x-1/2 origin-top"
           style={{
@@ -178,7 +184,7 @@ const Hero = () => {
           transition={{ duration: 2.0, ease: "easeInOut" }}
         />
 
-        {/* Orange dots */}
+        {/* Orange Dots */}
         {pos.centers.map((c, i) => (
           <motion.div
             key={i}
@@ -202,7 +208,7 @@ const Hero = () => {
         ))}
       </div>
 
-      {/* ✅ Contact Form Overlay */}
+      {/* Contact Panel */}
       <AnimatePresence>
         {showContact && (
           <ContactPanel
@@ -216,4 +222,3 @@ const Hero = () => {
 };
 
 export default Hero;
-
