@@ -104,10 +104,7 @@ const faqs: FAQ[] = [
         q: "When will I see SEO results?",
         a: "SEO is a mid-term investment. First ranking improvements usually appear after 2–3 months, strong results after 6–12 months.",
       },
-      {
-        q: "Do you guarantee #1 ranking on Google?",
-        a: "No serious agency can guarantee that. But we guarantee consistent improvement in visibility, leads, and conversions.",
-      },
+    
       {
         q: "Do you run ads too?",
         a: "Yes – we manage Google Ads, Meta Ads, and LinkedIn Ads with clear ROI reporting.",
@@ -148,7 +145,7 @@ const faqs: FAQ[] = [
       },
       {
         q: "Can you help outside Germany?",
-        a: "Yes. We are active in Eswatini and Southern Africa, and work remotely with clients worldwide.",
+        a: "Yes. We are active globally, and work remotely with clients worldwide.",
       },
       {
         q: "Do you offer white-label services?",

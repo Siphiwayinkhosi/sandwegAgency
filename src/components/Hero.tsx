@@ -108,7 +108,7 @@ const Hero = () => {
               SANDWEG
             </span>
             <span className="uppercase text-sm sm:text-base md:text-lg font-semibold tracking-wider">
-              Branding & Marketing
+              Marketing
             </span>
           </div>
         </motion.div>

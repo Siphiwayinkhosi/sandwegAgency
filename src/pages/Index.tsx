@@ -7,6 +7,7 @@ import Faq from "@/components/Faq";
 import Contact from "@/components/Contact";
 
 
+
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
@@ -16,6 +17,7 @@ const Index = () => {
      
       <Faq/>
        <Platz />
+     
       <Contact/>
       <Footer />   {/* ✅ now using your Footer.tsx */}
     </div>

@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import ContactPanel from "./ContactPanel"; // <-- ensure this path is correct
 
 export default function Services() {
-  const [activeIndex, setActiveIndex] = useState(null);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [contactOpen, setContactOpen] = useState(false);
+  const openContactForm = () => setContactOpen(true);
 
   const cards = [
     // === AI INTEGRATIONS ===
@@ -21,9 +24,7 @@ export default function Services() {
           </h1>
 
           <p>
-            Smarten your business with AI.
-            <br />
-            <br />
+           
             AI Automations help you eliminate repetitive tasks, speed up
             workflows, and free your team to focus on what really matters:
             growth. From virtual receptionists and smart scheduling to lead
@@ -87,7 +88,9 @@ export default function Services() {
           {/* CTA */}
           <motion.button
             whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ type: "tween", duration: 0.2, ease: "easeOut" }}
+            onClick={openContactForm}
             className="px-6 py-3 border border-orange-500 text-white rounded-full font-semibold mt-4 text-lg sm:text-xl hover:bg-orange-500/10 transition"
           >
             Book a free consultation today
@@ -151,7 +154,9 @@ export default function Services() {
           {/* CTA */}
           <motion.button
             whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ type: "tween", duration: 0.2, ease: "easeOut" }}
+            onClick={openContactForm}
             className="px-6 py-3 border border-orange-500 text-white rounded-full font-semibold mt-4 text-lg sm:text-xl hover:bg-orange-500/10 transition"
           >
             Let&apos;s get you started with a new website
@@ -174,9 +179,8 @@ export default function Services() {
             Get Found Online with Professional SEO
           </h1>
           <p>
-            Get found where it matters most.
-            <br />
-            <br />
+          
+        
             SEO (Search Engine Optimization) is the key to more visibility,
             more traffic, and more customers. We optimize your website so it
             ranks higher on Google and other search engines – making it easier
@@ -238,7 +242,9 @@ export default function Services() {
           {/* CTA */}
           <motion.button
             whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ type: "tween", duration: 0.2, ease: "easeOut" }}
+            onClick={openContactForm}
             className="px-6 py-3 border border-orange-500 text-white rounded-full font-semibold mt-4 text-lg sm:text-xl hover:bg-orange-500/10 transition"
           >
             Request your free SEO audit
@@ -266,11 +272,29 @@ export default function Services() {
           />
         ))}
       </div>
+
+      {/* Contact form panel */}
+      <ContactPanel open={contactOpen} onClose={() => setContactOpen(false)} />
     </section>
   );
 }
 
-const GridItem = ({ title, shortLines, fullContent, expanded, onClick }) => {
+type GridProps = {
+  title: string;
+  shortLines?: { text: string }[];
+  fullContent: React.ReactNode;
+  expanded: boolean;
+  onClick: () => void;
+  index?: number;
+};
+
+const GridItem: React.FC<GridProps> = ({
+  title,
+  shortLines,
+  fullContent,
+  expanded,
+  onClick,
+}) => {
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const [hover, setHover] = useState(false);
 
@@ -282,7 +306,7 @@ const GridItem = ({ title, shortLines, fullContent, expanded, onClick }) => {
       }`}
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
+      transition={{ type: "tween", duration: 0.6, ease: "easeOut" }}
       viewport={{ once: true, amount: 0.2 }}
       onMouseMove={(e) => {
         const rect = e.currentTarget.getBoundingClientRect();
@@ -291,20 +315,21 @@ const GridItem = ({ title, shortLines, fullContent, expanded, onClick }) => {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      {/* Glow effect */}
+      {/* Hover-follow glow (kept) — no spring/bounce */}
       <motion.div
         animate={{
           opacity: hover || expanded ? 1 : 0,
           x: pos.x - 250,
           y: pos.y - 250,
         }}
-        transition={{ type: "spring", stiffness: 80, damping: 30 }}
+        transition={{ type: "tween", duration: 0.2, ease: "easeOut" }}
         className="pointer-events-none absolute h-[600px] w-[600px] rounded-full bg-orange-500/90 blur-2xl"
       />
 
-      {/* Card content */}
+      {/* Card content (no bounce on expand) */}
       <motion.div
         layout
+        transition={{ type: "tween", duration: 0.4, ease: "easeOut" }}
         className="relative h-full rounded-3xl border border-gray-800 bg-neutral-900/95 px-8 py-12 flex flex-col shadow-lg"
       >
         {/* Header row */}
@@ -339,10 +364,10 @@ const GridItem = ({ title, shortLines, fullContent, expanded, onClick }) => {
           {expanded && (
             <motion.div
               key="expanded"
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 30 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
+              exit={{ opacity: 0, y: 20 }}
+              transition={{ type: "tween", duration: 0.35, ease: "easeOut" }}
               className="space-y-6"
             >
               {fullContent}

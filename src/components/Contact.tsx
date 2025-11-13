@@ -169,9 +169,8 @@ const Contact = () => {
               Ready to start?
             </h2>
 
-            <p className="mt-3 md:mt-4 text-neutral-300 md:text-lg">
-              Tap the button to open the contact form. It’s quick and simple.
-            </p>
+ 
+
           </div>
 
           <motion.button
