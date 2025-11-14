@@ -114,14 +114,22 @@ const Hero = () => {
         </motion.div>
 
         {/* CTA – opens contact instantly */}
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={() => setShowContact(true)}
-          className="border border-gray-400 px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm tracking-wide hover:bg-white hover:text-black transition"
-        >
-          Join our momentum →
-        </motion.button>
+       <motion.button
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+  onClick={() => setShowContact(true)}
+  className="
+    border border-gray-400 
+    px-3 py-1 text-[10px]      /* 📱 mobile: smaller */
+    sm:px-5 sm:py-2 sm:text-sm /* 🖥️ desktop: original size */
+    rounded-full tracking-wide 
+    hover:bg-white hover:text-black 
+    transition
+  "
+>
+  Join our momentum →
+</motion.button>
+
       </div>
 
       {/* Hero content */}
