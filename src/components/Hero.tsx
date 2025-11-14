@@ -114,24 +114,27 @@ const Hero = () => {
         </motion.div>
 
         {/* CTA – opens contact instantly */}
-   <motion.button
+ <motion.button
   whileHover={{ scale: 1.05 }}
   whileTap={{ scale: 0.95 }}
   onClick={() => setShowContact(true)}
   className="
     border border-gray-300
-    px-4 py-2        /* 📱 mobile: taller, cleaner */
-    text-[11px]      /* mobile: slightly larger text */
+    px-4 py-2
+    text-[11px]
     rounded-full 
     tracking-wide
     hover:bg-white hover:text-black 
     transition
-
-    sm:px-5 sm:py-2 sm:text-sm  /* 🖥️ desktop: unchanged */
+    max-w-[130px]    /* 📱 limit width on mobile */
+    
+    sm:max-w-none    /* 🖥️ desktop: normal */
+    sm:px-5 sm:py-2 sm:text-sm
   "
 >
   Join our momentum →
 </motion.button>
+
 
 
       </div>
