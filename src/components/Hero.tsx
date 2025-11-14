@@ -120,7 +120,7 @@ const Hero = () => {
   onClick={() => setShowContact(true)}
   className="
     border border-gray-300
-    px-4 py-2
+    px-4 py-1.5
     text-[11px]
     rounded-full 
     tracking-wide
