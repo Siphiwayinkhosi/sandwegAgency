@@ -1,10 +1,11 @@
 import Hero from "@/components/Hero";
-import MacbookScrollDemo from "@/components/macbook-scroll-demo";
+
 import Platz from "@/components/Platz";
 import Services from "@/components/Services";
 import Footer from "@/components/Footer";   // ✅ fixed import
 import Faq from "@/components/Faq";
 import Contact from "@/components/Contact";
+import Partner from "@/components/Partner";
 
 
 
@@ -12,10 +13,11 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Hero />
-      <MacbookScrollDemo />
+      
       <Services />
      
       <Faq/>
+      <Partner/>
        <Platz />
      
       <Contact/>

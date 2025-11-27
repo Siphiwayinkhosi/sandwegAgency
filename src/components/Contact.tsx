@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+/* ================================
+   BACKDROP
+================================ */
 const Backdrop = ({ onClose }) => (
   <motion.div
     className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm"
@@ -11,18 +14,21 @@ const Backdrop = ({ onClose }) => (
   />
 );
 
+/* ================================
+   CONTACT PANEL (unchanged mostly)
+================================ */
 const ContactPanel = ({ open, onClose }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
+
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
 
-  const handleChange = (e) => {
+  const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,7 +37,6 @@ const ContactPanel = ({ open, onClose }) => {
     try {
       const response = await fetch(
         "https://formsubmit.co/ajax/info@go-sandweg.com",
-
         {
           method: "POST",
           headers: {
@@ -52,14 +57,11 @@ const ContactPanel = ({ open, onClose }) => {
         setFormData({ name: "", email: "", message: "" });
         setTimeout(() => {
           setSent(false);
-          onClose(); // Auto close after success
+          onClose();
         }, 3000);
-      } else {
-        alert("Failed to send message. Try again.");
       }
-    } catch (error) {
-      console.error(error);
-      alert("An error occurred. Please try again.");
+    } catch {
+      alert("Something went wrong. Try again.");
     } finally {
       setSending(false);
     }
@@ -72,41 +74,53 @@ const ContactPanel = ({ open, onClose }) => {
           <Backdrop onClose={onClose} />
 
           <motion.div
-            className="fixed inset-x-0 bottom-0 md:right-0 md:inset-y-0 md:w-[600px] bg-black border-t md:border-l border-white/10 shadow-2xl rounded-t-3xl md:rounded-l-3xl z-50 overflow-hidden"
+            className="
+              fixed inset-x-0 bottom-0 
+              md:inset-y-0 md:w-[600px] md:mx-auto
+              bg-black border-t md:border border-white/10 
+              shadow-2xl rounded-t-3xl md:rounded-xl 
+              z-50 overflow-hidden
+            "
             initial={{ y: "100%" }}
             animate={{ y: 0 }}
             exit={{ y: "100%" }}
             transition={{ type: "spring", stiffness: 140, damping: 22 }}
           >
-            {/* Header */}
-            <div className="flex items-center justify-between px-8 py-6 border-b border-white/10">
-              <div className="flex items-center gap-4">
-                <img
-                  src="/logo.png"
-                  alt="Logo"
-                  className="max-w-[160px] md:max-w-[200px] h-auto object-contain"
-                />
-                <h2 className="text-2xl font-bold text-white">Contact Us</h2>
-              </div>
+            {/* PANEL HEADER */}
+            <div className="relative px-8 py-6 border-b border-white/10 flex flex-col items-center">
+              <img
+                src="/logo.png"
+                alt="Logo"
+                className="max-w-[180px] md:max-w-[220px] h-auto object-contain"
+              />
+
+              <h2 className="text-2xl font-light text-white text-center mt-4">
+                Contact Us
+              </h2>
+
+              {/* Close button */}
               <button
                 onClick={onClose}
-                className="text-sm text-neutral-300 hover:text-orange-500 transition"
+                className="absolute right-6 top-6 text-sm text-neutral-300 hover:text-orange-500 transition"
               >
-                Close ✕
+                ✕
               </button>
             </div>
 
-            {/* ✅ Functional Contact Form */}
+            {/* PANEL FORM */}
             <form onSubmit={handleSubmit} className="p-8 space-y-6 bg-black">
               <div>
                 <label className="block text-sm mb-1 text-white">Name</label>
                 <input
-                  type="text"
                   name="name"
                   required
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full rounded-xl bg-black border border-white/20 px-4 py-3 text-white placeholder:text-neutral-500 focus:border-orange-500 focus:ring-1 focus:ring-orange-500 outline-none"
+                  className="
+                    w-full rounded-xl bg-black border border-white/20 
+                    px-4 py-3 text-white placeholder:text-neutral-500
+                    focus:border-orange-500 focus:ring-1 focus:ring-orange-500 
+                  "
                   placeholder="Your name"
                 />
               </div>
@@ -114,12 +128,16 @@ const ContactPanel = ({ open, onClose }) => {
               <div>
                 <label className="block text-sm mb-1 text-white">Email</label>
                 <input
-                  type="email"
                   name="email"
                   required
+                  type="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full rounded-xl bg-black border border-white/20 px-4 py-3 text-white placeholder:text-neutral-500 focus:border-orange-500 focus:ring-1 focus:ring-orange-500 outline-none"
+                  className="
+                    w-full rounded-xl bg-black border border-white/20 
+                    px-4 py-3 text-white placeholder:text-neutral-500
+                    focus:border-orange-500 focus:ring-1 focus:ring-orange-500 
+                  "
                   placeholder="you@example.com"
                 />
               </div>
@@ -131,7 +149,11 @@ const ContactPanel = ({ open, onClose }) => {
                   required
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full min-h-[160px] rounded-xl bg-black border border-white/20 px-4 py-3 text-white placeholder:text-neutral-500 focus:border-orange-500 focus:ring-1 focus:ring-orange-500 outline-none"
+                  className="
+                    w-full min-h-[150px] rounded-xl bg-black border border-white/20 
+                    px-4 py-3 text-white placeholder:text-neutral-500
+                    focus:border-orange-500 focus:ring-1 focus:ring-orange-500 
+                  "
                   placeholder="Write your message..."
                 />
               </div>
@@ -139,15 +161,15 @@ const ContactPanel = ({ open, onClose }) => {
               <motion.button
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                type="submit"
                 disabled={sending}
-                className="w-full rounded-xl border border-orange-500 px-6 py-3 text-white font-semibold shadow-lg hover:bg-white hover:text-orange-500 transition"
+                className="
+                  w-full rounded-xl border border-orange-500 px-6 py-3 
+                  text-white font-semibold shadow-lg
+                  hover:bg-white hover:text-orange-500 transition
+                "
+                type="submit"
               >
-                {sending
-                  ? "Sending..."
-                  : sent
-                  ? "✅ Message Sent!"
-                  : "Send Message"}
+                {sending ? "Sending..." : sent ? "Sent!" : "Send Message"}
               </motion.button>
             </form>
           </motion.div>
@@ -157,49 +179,47 @@ const ContactPanel = ({ open, onClose }) => {
   );
 };
 
+/* ================================
+   MAIN CONTACT SECTION BELOW
+================================ */
 const Contact = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <section className="relative w-full bg-black text-white">
-      <div className="mx-auto max-w-7xl px-6 md:px-10 py-16 md:py-24">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-          <div className="max-w-2xl">
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight leading-tight text-center md:text-left">
-              Ready to start?
-            </h2>
+    <section className="relative w-full bg-black text-white py-20">
 
- 
-
-          </div>
-
-          <motion.button
-            whileHover={{ scale: 1.06 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={() => setOpen(true)}
-            className="group relative inline-flex items-center gap-3 rounded-2xl border border-orange-500 px-6 py-3 text-base font-semibold text-white shadow-xl hover:bg-white hover:text-orange-500 transition"
-          >
-            <span>Contact Us</span>
-            <span className="relative -mr-1 grid place-items-center rounded-full border border-orange-500 p-1.5 transition group-hover:bg-white group-hover:text-orange-500">
-              <svg
-                className="h-5 w-5"
-                viewBox="0 0 24 24"
-                fill="none"
-                aria-hidden="true"
-              >
-                <path
-                  d="M5 12h14M13 5l7 7-7 7"
-                  stroke="currentColor"
-                  strokeWidth={1.8}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </span>
-          </motion.button>
-        </div>
+      {/* CENTERED LOGO */}
+      <div className="flex justify-center mb-10">
+        <img
+          src="/logo.png"
+          className="w-40 sm:w-52 md:w-64 object-contain"
+          alt="Logo"
+        />
       </div>
 
+      {/* CODE-STYLE CALL TO ACTION */}
+      <div className="text-center space-y-4">
+
+        {/* Code-style heading */}
+        <h2 className="font-mono text-3xl sm:text-4xl md:text-5xl font-light text-white">
+          //ready_to_start?
+        </h2>
+
+        {/* Code-style action button */}
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.97 }}
+          onClick={() => setOpen(true)}
+          className="
+            text-orange-400 font-mono underline underline-offset-4 
+            hover:text-orange-300 transition text-xl cursor-pointer
+          "
+        >
+          contact_us()
+        </motion.button>
+      </div>
+
+      {/* PANEL */}
       <ContactPanel open={open} onClose={() => setOpen(false)} />
     </section>
   );

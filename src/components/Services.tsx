@@ -1,380 +1,219 @@
 import React, { useState } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import ContactPanel from "./ContactPanel"; // <-- ensure this path is correct
+import ContactPanel from "./ContactPanel";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 export default function Services() {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [expanded, setExpanded] = useState<number | null>(null);
   const [contactOpen, setContactOpen] = useState(false);
-  const openContactForm = () => setContactOpen(true);
 
-  const cards = [
-    // === AI INTEGRATIONS ===
+  const toggle = (i: number) => {
+    setExpanded(expanded === i ? null : i);
+  };
+
+  const services = [
     {
-      title: "AI Integrations",
-      shortLines: [
-        { text: "Virtual Receptionists" },
-        { text: "Chatbots" },
-        { text: "AI Scheduling" },
+      name: "ai_integrations",
+      description: "Smarten your business with AI automations.",
+      body: [
+        {
+          key: "mission",
+          value: "Automate workflows, boost efficiency, and reduce manual tasks.",
+        },
+        {
+          key: "features",
+          value: [
+            "Virtual Receptionists",
+            "Chatbots",
+            "AI Scheduling",
+            "Lead Qualification",
+          ],
+        },
+        {
+          key: "benefits",
+          value: [
+            "Automate repetitive tasks",
+            "Save time & operational costs",
+            "Increase customer response speed",
+            "Scale smarter with AI",
+          ],
+        },
+        {
+          key: "use_cases",
+          value: [
+            "Small businesses → customer support & appointment booking",
+            "Medium enterprises → CRM + workflow automation",
+            "Agencies → lead handling + dashboards",
+          ],
+        },
       ],
-      fullContent: (
-        <div className="space-y-6 text-neutral-200 text-lg sm:text-xl leading-relaxed">
-          <h1 className="text-3xl md:text-4xl font-bold text-white">
-            Smarten Your Business with AI Automations
-          </h1>
-
-          <p>
-           
-            AI Automations help you eliminate repetitive tasks, speed up
-            workflows, and free your team to focus on what really matters:
-            growth. From virtual receptionists and smart scheduling to lead
-            qualification and customer support, we design solutions that adapt
-            to your business.
-          </p>
-
-          {/* Core Benefits */}
-          <div>
-            <h2 className="text-xl font-semibold text-white mb-2">
-              Core Benefits
-            </h2>
-            <div className="border border-orange-500 rounded-xl p-5">
-              <ul className="list-disc list-inside space-y-2 text-white text-base sm:text-lg">
-                <li>Automate repetitive tasks</li>
-                <li>AI chatbots & virtual receptionists</li>
-                <li>Smart scheduling & lead qualification</li>
-                <li>Cost savings & scalability</li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Use Cases */}
-          <div>
-            <h2 className="text-xl font-semibold text-white mb-2">Use Cases</h2>
-            <div className="border border-orange-500 rounded-xl p-5">
-              <ul className="list-disc list-inside space-y-2 text-white text-base sm:text-lg">
-                <li>
-                  <b>Small businesses:</b> customer support & appointment booking
-                </li>
-                <li>
-                  <b>Medium enterprises:</b> workflow automations (CRM, emails,
-                  reporting)
-                </li>
-                <li>
-                  <b>Agencies:</b> faster lead handling, client dashboards
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          {/* How It Works */}
-          <div>
-            <h2 className="text-xl font-semibold text-white mb-2">
-              How It Works
-            </h2>
-            <div className="border border-orange-500 rounded-xl p-5">
-              <ol className="list-decimal list-inside space-y-2 text-white text-base sm:text-lg">
-                <li>Audit your processes</li>
-                <li>Identify automation opportunities</li>
-                <li>Build & integrate AI workflows</li>
-                <li>Ongoing optimization</li>
-              </ol>
-            </div>
-          </div>
-
-          <blockquote className="italic text-orange-400 text-lg sm:text-xl">
-            “We saved 15 hours per week using AI scheduling.”
-          </blockquote>
-
-          {/* CTA */}
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
-            transition={{ type: "tween", duration: 0.2, ease: "easeOut" }}
-            onClick={openContactForm}
-            className="px-6 py-3 border border-orange-500 text-white rounded-full font-semibold mt-4 text-lg sm:text-xl hover:bg-orange-500/10 transition"
-          >
-            Book a free consultation today
-          </motion.button>
-        </div>
-      ),
     },
 
-    // === WEB DESIGN ===
     {
-      title: "Web Design",
-      shortLines: [
-        { text: "Scalable Web Design" },
-        { text: "Smart Websites" },
-        { text: "Mobile Responsive" },
+      name: "web_design",
+      description: "Modern web design that converts.",
+      body: [
+        {
+          key: "offer",
+          value: [
+            "Custom responsive design",
+            "Optimized for mobile & speed",
+            "Domain & hosting included",
+            "Future-ready with AI chat & bookings",
+          ],
+        },
+        {
+          key: "process",
+          value: [
+            "Discovery & strategy",
+            "Wireframes & design mockups",
+            "Development & testing",
+            "Launch & support",
+          ],
+        },
       ],
-      fullContent: (
-        <div className="space-y-6 text-neutral-200 text-lg sm:text-xl leading-relaxed">
-          <h1 className="text-3xl md:text-4xl font-bold text-white">
-            Modern Web Design That Converts
-          </h1>
-          <p>
-            Your website is your digital storefront — make it unforgettable.
-          </p>
-
-          {/* What We Offer */}
-          <div>
-            <h2 className="text-xl font-semibold text-white mb-2">
-              What We Offer
-            </h2>
-            <div className="border border-orange-500 rounded-xl p-5">
-              <ul className="list-disc list-inside space-y-2 text-white text-base sm:text-lg">
-                <li>Custom responsive design</li>
-                <li>Domain & hosting (1 year free)</li>
-                <li>Optimized for speed & mobile</li>
-                <li>Future-ready with integrations (chat, AI, booking)</li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Portfolio */}
-          <div>
-            <h2 className="text-xl font-semibold text-white mb-2">
-              Portfolio / Showcase
-            </h2>
-          </div>
-
-          {/* Process */}
-          <div>
-            <h2 className="text-xl font-semibold text-white mb-2">Process</h2>
-            <div className="border border-orange-500 rounded-xl p-5">
-              <ol className="list-decimal list-inside space-y-2 text-white text-base sm:text-lg">
-                <li>Discovery & strategy</li>
-                <li>Design mockups</li>
-                <li>Development & testing</li>
-                <li>Launch & support</li>
-              </ol>
-            </div>
-          </div>
-
-          {/* CTA */}
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
-            transition={{ type: "tween", duration: 0.2, ease: "easeOut" }}
-            onClick={openContactForm}
-            className="px-6 py-3 border border-orange-500 text-white rounded-full font-semibold mt-4 text-lg sm:text-xl hover:bg-orange-500/10 transition"
-          >
-            Let&apos;s get you started with a new website
-          </motion.button>
-        </div>
-      ),
     },
 
-    // === SEO ===
     {
-      title: "SEO",
-      shortLines: [
-        { text: "Search Engine Optimization" },
-        { text: "Increased Visibility" },
-        { text: "Higher Google Ranking" },
+      name: "seo",
+      description: "Get found online with professional SEO.",
+      body: [
+        {
+          key: "why",
+          value: [
+            "90% of online journeys start with search",
+            "Higher ranking = more qualified leads",
+          ],
+        },
+        {
+          key: "services",
+          value: [
+            "On-page optimization",
+            "Keyword research",
+            "Local SEO",
+            "Link building",
+          ],
+        },
+        {
+          key: "results",
+          value: "Clients typically see ranking improvements in 3-6 months.",
+        },
       ],
-      fullContent: (
-        <div className="space-y-6 text-neutral-200 text-lg sm:text-xl leading-relaxed">
-          <h1 className="text-3xl md:text-4xl font-bold text-white">
-            Get Found Online with Professional SEO
-          </h1>
-          <p>
-          
-        
-            SEO (Search Engine Optimization) is the key to more visibility,
-            more traffic, and more customers. We optimize your website so it
-            ranks higher on Google and other search engines – making it easier
-            for the right people to discover your business.
-          </p>
-
-          {/* Why SEO Matters */}
-          <div>
-            <h2 className="text-xl font-semibold text-white mb-2">
-              Why SEO Matters
-            </h2>
-            <div className="border border-orange-500 rounded-xl p-5">
-              <ul className="list-disc list-inside space-y-2 text-white text-base sm:text-lg">
-                <li>90% of online journeys start with search</li>
-                <li>Higher rankings = more qualified leads</li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Our Services */}
-          <div>
-            <h2 className="text-xl font-semibold text-white mb-2">
-              Our Services
-            </h2>
-            <div className="border border-orange-500 rounded-xl p-5">
-              <ul className="list-disc list-inside space-y-2 text-white text-base sm:text-lg">
-                <li>On-page optimization (titles, meta tags, speed)</li>
-                <li>Keyword research & content strategy</li>
-                <li>Local SEO (Google Business Profile, maps)</li>
-                <li>Link building & authority growth</li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Results */}
-          <div>
-            <h2 className="text-xl font-semibold text-white mb-2">
-              Results-Oriented
-            </h2>
-            <p className="italic text-orange-400 text-lg sm:text-xl">
-              “Clients typically see ranking improvements in 3–6 months.”
-            </p>
-          </div>
-
-          {/* Pricing */}
-          <div>
-            <h2 className="text-xl font-semibold text-white mb-2">
-              Pricing / Packages
-            </h2>
-            <div className="border border-orange-500 rounded-xl p-5">
-              <ul className="list-disc list-inside space-y-2 text-white text-base sm:text-lg">
-                <li>Starter: Local SEO setup</li>
-                <li>Growth: Full website optimization</li>
-                <li>Premium: Ongoing SEO campaigns</li>
-              </ul>
-            </div>
-          </div>
-
-          {/* CTA */}
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
-            transition={{ type: "tween", duration: 0.2, ease: "easeOut" }}
-            onClick={openContactForm}
-            className="px-6 py-3 border border-orange-500 text-white rounded-full font-semibold mt-4 text-lg sm:text-xl hover:bg-orange-500/10 transition"
-          >
-            Request your free SEO audit
-          </motion.button>
-        </div>
-      ),
     },
   ];
 
   return (
-    <section className="w-full bg-black py-20 relative">
-      {/* Heading stays same size */}
-      <h2 className="mb-12 text-center text-5xl font-bold text-white">
-        Our Services
+    <section className="w-full bg-black text-white font-mono py-20 px-6 sm:px-16">
+      <h2 className="text-center text-4xl sm:text-5xl font-light mb-16 tracking-tight">
+        //Our Services
       </h2>
 
-      <div className="flex flex-col md:flex-row justify-center gap-8 px-6 relative z-10">
-        {cards.map((card, i) => (
-          <GridItem
-            key={i}
-            {...card}
-            index={i}
-            expanded={activeIndex === i}
-            onClick={() => setActiveIndex(activeIndex === i ? null : i)}
-          />
-        ))}
+      {/* Code block container */}
+      <div className="max-w-7xl mx-auto text-[13px] sm:text-[16px] md:text-[19px] leading-relaxed whitespace-pre-wrap">
+
+        {/* Opening line */}
+        <div className="mb-6">
+          <span className="text-white">const </span>
+          <span className="text-yellow-300">services</span>
+          <span className="text-white"> = {"{"}</span>
+        </div>
+
+        {/* SERVICES GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-16 ml-6">
+          {services.map((svc, index) => (
+            <div key={index} className="relative">
+
+              {/* FUNCTION HEADER */}
+              <button
+                onClick={() => toggle(index)}
+                className="flex items-center gap-2 text-left group"
+              >
+                {expanded === index ? (
+                  <ChevronUp className="text-orange-500 w-4 h-4" />
+                ) : (
+                  <ChevronDown className="text-orange-500 w-4 h-4" />
+                )}
+
+                {/* function name */}
+                <span className="text-teal-300 group-hover:text-teal-100 transition">
+                  {svc.name}
+                </span>
+                <span className="text-white">() {"{"}</span>
+              </button>
+
+              {/* DESCRIPTION COMMENT */}
+              <div className="ml-7 text-purple-300 opacity-70 mt-1 mb-2">
+                {"// " + svc.description}
+              </div>
+
+              {/* EXPANDED BODY */}
+              <AnimatePresence>
+                {expanded === index && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.25 }}
+                    className="ml-7 mt-2"
+                  >
+                    {svc.body.map((item, i) => (
+                      <div key={i} className="mb-3">
+                        
+                        {/* key */}
+                        <span className="text-yellow-300">{item.key}</span>
+                        <span className="text-white">: </span>
+
+                        {/* ARRAY START */}
+                        {Array.isArray(item.value) && (
+                          <span className="text-white">[</span>
+                        )}
+
+                        {/* ARRAY VALUES */}
+                        {Array.isArray(item.value) ? (
+                          <div className="ml-6">
+                            {item.value.map((line, idx) => (
+                              <div key={idx} className="text-green-400">
+                                "{line}",
+                              </div>
+                            ))}
+                          </div>
+                        ) : (
+                          /* SINGLE STRING VALUE */
+                          <span className="text-pink-400">
+                            "{item.value}"
+                          </span>
+                        )}
+
+                        {/* ARRAY END OR STRING END */}
+                        <span className="text-white">
+                          {Array.isArray(item.value) ? "]," : ","}
+                        </span>
+                      </div>
+                    ))}
+
+                    {/* CTA */}
+                    <button
+                      onClick={() => setContactOpen(true)}
+                      className="mt-4 mb-4 text-orange-400 underline underline-offset-4 hover:text-orange-300 transition"
+                    >
+                      book_consultation()
+                    </button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* service closing brace */}
+              <span className="text-white ml-6">{"},"}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* closing main brace */}
+        <span className="text-white ml-0">{"};"}</span>
       </div>
 
-      {/* Contact form panel */}
+      {/* CONTACT PANEL */}
       <ContactPanel open={contactOpen} onClose={() => setContactOpen(false)} />
     </section>
   );
 }
-
-type GridProps = {
-  title: string;
-  shortLines?: { text: string }[];
-  fullContent: React.ReactNode;
-  expanded: boolean;
-  onClick: () => void;
-  index?: number;
-};
-
-const GridItem: React.FC<GridProps> = ({
-  title,
-  shortLines,
-  fullContent,
-  expanded,
-  onClick,
-}) => {
-  const [pos, setPos] = useState({ x: 0, y: 0 });
-  const [hover, setHover] = useState(false);
-
-  return (
-    <motion.div
-      layout
-      className={`relative rounded-3xl bg-black p-[2px] overflow-hidden flex-1 transition-all duration-500 ${
-        expanded ? "max-w-[800px]" : "max-w-[500px]"
-      }`}
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ type: "tween", duration: 0.6, ease: "easeOut" }}
-      viewport={{ once: true, amount: 0.2 }}
-      onMouseMove={(e) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        setPos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-      }}
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
-    >
-      {/* Hover-follow glow (kept) — no spring/bounce */}
-      <motion.div
-        animate={{
-          opacity: hover || expanded ? 1 : 0,
-          x: pos.x - 250,
-          y: pos.y - 250,
-        }}
-        transition={{ type: "tween", duration: 0.2, ease: "easeOut" }}
-        className="pointer-events-none absolute h-[600px] w-[600px] rounded-full bg-orange-500/90 blur-2xl"
-      />
-
-      {/* Card content (no bounce on expand) */}
-      <motion.div
-        layout
-        transition={{ type: "tween", duration: 0.4, ease: "easeOut" }}
-        className="relative h-full rounded-3xl border border-gray-800 bg-neutral-900/95 px-8 py-12 flex flex-col shadow-lg"
-      >
-        {/* Header row */}
-        <div className="flex items-center justify-between mb-6">
-          <h3 className="text-3xl md:text-4xl font-semibold text-white">
-            {title}
-          </h3>
-
-          <button
-            onClick={onClick}
-            className="group p-2 rounded-full border border-orange-500 transition"
-          >
-            {expanded ? (
-              <ChevronUp size={22} className="text-orange-500" />
-            ) : (
-              <ChevronDown size={22} className="text-orange-500" />
-            )}
-          </button>
-        </div>
-
-        {/* Short list */}
-        {shortLines?.length > 0 && (
-          <ul className="space-y-2 text-neutral-300 mb-6 list-disc list-inside text-base sm:text-lg">
-            {shortLines.map((item, idx) => (
-              <li key={idx}>{item.text}</li>
-            ))}
-          </ul>
-        )}
-
-        {/* Expanded */}
-        <AnimatePresence>
-          {expanded && (
-            <motion.div
-              key="expanded"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
-              transition={{ type: "tween", duration: 0.35, ease: "easeOut" }}
-              className="space-y-6"
-            >
-              {fullContent}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.div>
-    </motion.div>
-  );
-};

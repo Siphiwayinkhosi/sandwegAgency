@@ -1,234 +1,294 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import ContactPanel from "./ContactPanel"; // ✅ must exist in same folder
+import ContactPanel from "./ContactPanel";
 
-const Hero = () => {
-  const [showContact, setShowContact] = useState(false); // controls popup
+// Split text into an array of characters
+const splitLetters = (text) => text.split("");
 
-  const containerRef = useRef(null);
-  const leftColRef = useRef(null);
-  const line1Ref = useRef(null);
-  const line2Ref = useRef(null);
-  const line3Ref = useRef(null);
-  const runMeasureRef = useRef(() => {});
-  const [pos, setPos] = useState({
-    left: 60,
-    top: 0,
-    height: 0,
-    centers: [0, 0, 0],
-    measured: false,
-  });
+// TITLE
+const TITLE_LINE = [
+  { text: "// Welcome to Sandweg Marketing", className: "text-orange-400" },
+];
+const CODE_LINES = [
+  [
+    {
+      text: "= { Boutique Agency for digital Branding & Marketing }",
+      className: "text-pink-400",
+    },
+  ],
 
+  [],
+
+  [
+    { text: "const ", className: "text-white" },
+    { text: "agency", className: "text-yellow-300" },
+    { text: " = {", className: "text-white" },
+  ],
+
+  [
+    { text: "  mission: ", className: "text-yellow-300" },
+    {
+      text: `"Driven by communication, powered by AI — we build brands with digital marketing.",`,
+      className: "text-white",
+    },
+  ],
+
+  [
+    { text: "  description: ", className: "text-yellow-300" },
+    {
+      text: `"A personal, boutique agency where communication meets technology.",`,
+      className: "text-white",
+    },
+  ],
+
+  [
+    { text: "  services: [", className: "text-yellow-300" },
+    { text: `"websites()"`, className: "text-green-400" },
+    { text: ", ", className: "text-white" },
+    { text: `"SEO()"`, className: "text-green-400" },
+    { text: ", ", className: "text-white" },
+    { text: `"branding()"`, className: "text-green-400" },
+    { text: ", ", className: "text-white" },
+    { text: `"automation()"`, className: "text-green-400" },
+    { text: ", ", className: "text-white" },
+    { text: `"analytics()"`, className: "text-green-400" },
+    { text: "],", className: "text-white" },
+  ],
+
+  [],
+
+  [
+    { text: "  values: {", className: "text-yellow-300" },
+  ],
+
+  [
+    { text: "    communication: ", className: "text-yellow-300" },
+    { text: `"always personal",`, className: "text-white" },
+  ],
+
+  [
+    { text: "    technology: ", className: "text-yellow-300" },
+    { text: `"always intelligent",`, className: "text-white" },
+  ],
+
+  [
+    { text: "    design: ", className: "text-yellow-300" },
+    { text: `"always crafted",`, className: "text-white" },
+  ],
+
+  [{ text: "  },", className: "text-white" }],
+
+  [],
+
+  [
+    { text: "  mode: ", className: "text-yellow-300" },
+    {
+      text: `"contact_now"`,
+      className:
+        "text-orange-400 underline cursor-pointer hover:text-orange-300 transition",
+      onClick: "open_contact",
+    },
+    { text: ",", className: "text-white" },
+  ],
+
+  [{ text: "};", className: "text-white" }],
+
+  [],
+
+  [
+    { text: "const ", className: "text-white" },
+    { text: "manifesto", className: "text-yellow-300" },
+    { text: " = {", className: "text-white" },
+  ],
+
+  [
+    { text: "  belief: ", className: "text-yellow-300" },
+    {
+      text: `"Marketing should be smarter, simpler, more beautiful.",`,
+      className: "text-white",
+    },
+  ],
+
+  [
+    { text: "  why: ", className: "text-yellow-300" },
+    {
+      text: `"We create AI-driven websites and tools with design at their core, so your dream can grow into a thriving business.",`,
+      className: "text-white",
+    },
+  ],
+
+  [
+    { text: "  problem: ", className: "text-yellow-300" },
+   {
+  text: `"Marketing often feels complicated, outdated, disconnected from what customers really respond to.",`,
+  className: "text-white",
+},
+
+  ],
+
+  [
+    { text: "  challenge: ", className: "text-yellow-300" },
+    {
+      text: `"We blend cutting-edge technology with creativity, AI that saves time, contemporary design, tools that make growth inevitable.",`,
+      className: "text-white",
+    },
+  ],
+
+  [
+    { text: "  whatWeDo: [", className: "text-yellow-300" },
+  ],
+
+  [
+    {
+      text: `"We don’t just build websites or run campaigns.",`,
+      className: "text-green-400",
+    },
+  ],
+
+  [
+    {
+      text: `"We craft experiences that amplify your message and connect you with your audience.",`,
+      className: "text-green-400",
+    },
+  ],
+
+  [{ text: "  ],", className: "text-white" }],
+
+  [{ text: "};", className: "text-white" }],
+];
+
+
+
+const TITLE_DELAY = 1500; // delay before code starts typing
+const TYPING_DELAY = 180;
+
+export default function Hero() {
+  const [showContact, setShowContact] = useState(false);
+  const [titleVisible, setTitleVisible] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(0);
+
+  // Reveal title first
   useEffect(() => {
-    const measure = () => {
-      if (
-        !containerRef.current ||
-        !leftColRef.current ||
-        !line1Ref.current ||
-        !line2Ref.current ||
-        !line3Ref.current
-      )
-        return;
-
-      const containerRect = containerRef.current.getBoundingClientRect();
-      const leftRect = leftColRef.current.getBoundingClientRect();
-
-      const centers = [line1Ref, line2Ref, line3Ref].map((r) => {
-        const el = r.current;
-        const rect = el.getBoundingClientRect();
-        const fontSize = parseFloat(window.getComputedStyle(el).fontSize);
-        return rect.top - containerRect.top + rect.height / 2 - fontSize * 0.05;
-      });
-
-      const top = centers[0];
-      const height = centers[2] - centers[0];
-      const left = leftRect.left - containerRect.left + leftRect.width / 2;
-
-      setPos({
-        left,
-        top,
-        height,
-        centers,
-        measured: true,
-      });
-    };
-
-    const runMeasure = () => {
-      if (document.fonts && document.fonts.ready) {
-        document.fonts.ready.then(() => {
-          requestAnimationFrame(() => {
-            requestAnimationFrame(measure);
-          });
-        });
-      } else {
-        requestAnimationFrame(() => {
-          requestAnimationFrame(measure);
-        });
-      }
-    };
-
-    runMeasureRef.current = runMeasure;
-    runMeasure();
-
-    const resizeObserver = new ResizeObserver(runMeasure);
-    if (containerRef.current) resizeObserver.observe(containerRef.current);
-
-    window.addEventListener("resize", runMeasure);
-
-    return () => {
-      resizeObserver.disconnect();
-      window.removeEventListener("resize", runMeasure);
-    };
+    setTimeout(() => {
+      setTitleVisible(true);
+    }, 200);
   }, []);
+
+  // After title, delay then start typing code
+ useEffect(() => {
+  if (!titleVisible) return;
+
+  const timeout = setTimeout(() => {
+    let index = 0;
+    const interval = setInterval(() => {
+      index++;
+      setVisibleCount(index);
+
+      if (index >= CODE_LINES.length) clearInterval(interval);
+    }, TYPING_DELAY);
+  }, TITLE_DELAY); // <-- REAL DELAY HERE
+
+  return () => clearTimeout(timeout);
+}, [titleVisible]);
+
 
   return (
     <section
-      className="relative w-full text-white font-[Raleway]"
+      className="relative w-full min-h-screen text-white font-mono"
       style={{
         backgroundImage: "url('/sand.png')",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
-      {/* Background overlay */}
       <div className="absolute inset-0 bg-black/70 z-0" />
 
-      {/* Top bar */}
-      <div className="relative z-10 flex justify-between items-center px-4 sm:px-10 py-4 sm:py-6">
-        {/* Logo + Text */}
-        <motion.div
-          className="flex items-center gap-3 sm:gap-6"
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1.5 }}
-        >
-          <img src="/logo.png" alt="Logo" className="w-20 sm:w-32 md:w-40" />
-          <div className="flex flex-col leading-snug">
-            <span className="uppercase text-sm sm:text-base md:text-lg font-semibold tracking-wider">
-              SANDWEG
-            </span>
-            <span className="uppercase text-sm sm:text-base md:text-lg font-semibold tracking-wider">
-              Marketing
-            </span>
-          </div>
-        </motion.div>
+  
 
-        {/* CTA – opens contact instantly */}
- <motion.button
-  whileHover={{ scale: 1.05 }}
-  whileTap={{ scale: 0.95 }}
-  onClick={() => setShowContact(true)}
+      {/* CODE AREA */}
+     <div
   className="
-    border border-gray-300
-    px-4 py-1.5
-    text-[11px]
-    rounded-full 
-    tracking-wide
-    hover:bg-white hover:text-black 
-    transition
-    max-w-[130px]    /* 📱 limit width on mobile */
-    
-    sm:max-w-none    /* 🖥️ desktop: normal */
-    sm:px-5 sm:py-2 sm:text-sm
+    relative z-10 px-6 sm:px-10 py-10
+    whitespace-pre-wrap break-words
+    text-[13px] sm:text-[16px] md:text-[19px]
+    leading-relaxed font-mono tabular-nums
   "
 >
-  Join our momentum →
-</motion.button>
 
+        {/* TITLE */}
+{titleVisible && (
+  <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 0.4 }}
+    className="mb-6"
+  >
+    <div className="flex flex-wrap text-white font-light 
+  text-4xl sm:text-5xl md:text-7xl leading-tight"
+>
 
-
-      </div>
-
-      {/* Hero content */}
-      <div
-        ref={containerRef}
-        className="relative z-10 flex items-center px-4 sm:px-10 mt-20 sm:mt-20 h-auto sm:h-[calc(100%-120px)]"
-      >
-        <div ref={leftColRef} className="w-6 sm:w-12 mr-3 sm:mr-6 flex-shrink-0" />
-
-        <div className="flex flex-col justify-center leading-tight space-y-4 sm:space-y-6">
-          <motion.div
-            ref={line1Ref}
-            className="uppercase tracking-[0.15em] sm:tracking-[0.35em] text-3xl sm:text-5xl md:text-8xl font-semibold"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1.8, delay: 0.8 }}
-          >
-            DESIGN
-          </motion.div>
-
-          <motion.div
-            ref={line2Ref}
-            className="uppercase tracking-[0.15em] sm:tracking-[0.35em] text-3xl sm:text-5xl md:text-8xl font-semibold"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1.8, delay: 1.4 }}
-          >
-            MEETS
-          </motion.div>
-
-          <motion.div
-            ref={line3Ref}
-            className="uppercase tracking-[0.15em] sm:tracking-[0.35em] text-3xl sm:text-5xl md:text-8xl font-semibold"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1.8, delay: 2.0 }}
-          >
-            TECHNOLOGY
-          </motion.div>
-        </div>
-
-        {/* Orange line */}
-        <motion.div
-          className="absolute w-[1px] bg-orange-500 -translate-x-1/2 origin-top"
-          style={{
-            left: `${pos.left}px`,
-            top: `${pos.top}px`,
+      {splitLetters(TITLE_LINE[0].text).map((char, i) => (
+        <motion.span
+          key={i}
+          className="inline-block"
+          initial={{ opacity: 0, y: 20, rotateX: 60 }}
+          animate={{ opacity: 1, y: 0, rotateX: 0 }}
+          transition={{
+            duration: 0.28,
+            delay: 0.04 * i,
+            ease: [0.16, 1, 0.3, 1],
           }}
-          initial={{ height: 0, opacity: 0 }}
-          animate={{
-            height: pos.measured ? pos.height : 0,
-            opacity: pos.measured ? 1 : 0,
-          }}
-          transition={{ duration: 2.0, ease: "easeInOut" }}
-        />
+        >
+          {char === " " ? "\u00A0" : char}
+        </motion.span>
+      ))}
+    </div>
 
-        {/* Orange dots */}
-        {pos.centers.map((c, i) => (
+    {/* Cursor */}
+    <span className="animate-pulse text-purple-300 text-4xl">|</span>
+  </motion.div>
+)}
+
+
+        {/* TYPED CODE */}
+        {CODE_LINES.slice(0, visibleCount).map((tokens, lineIndex) => (
           <motion.div
-            key={i}
-            className="absolute flex items-center justify-center"
-            style={{
-              left: `${pos.left}px`,
-              top: `${c}px`,
-            }}
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{
-              delay: 0.8 + i * 0.6,
-              duration: 1.6,
-              type: "spring",
-              stiffness: 250,
-              damping: 30,
-            }}
+            key={lineIndex}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.25 }}
           >
-            <div className="w-1 h-1 sm:w-2 sm:h-2 rounded-full bg-orange-500 -translate-x-1/2 -translate-y-1/2" />
+            {tokens.length === 0 ? (
+              <span>&nbsp;</span>
+            ) : (
+              tokens.map((token, tokenIndex) => (
+                <span
+  key={tokenIndex}
+  className={token.className}
+  onClick={() => {
+    if (token.onClick === "open_contact") setShowContact(true);
+  }}
+>
+  {token.text}
+</span>
+
+              ))
+            )}
+
+            {lineIndex === visibleCount - 1 && (
+              <span className="animate-pulse text-purple-300">|</span>
+            )}
           </motion.div>
         ))}
       </div>
 
-      {/* ✅ Contact Form Overlay */}
+      {/* CONTACT PANEL */}
       <AnimatePresence>
         {showContact && (
-          <ContactPanel
-            open={showContact}
-            onClose={() => setShowContact(false)}
-          />
+          <ContactPanel open={showContact} onClose={() => setShowContact(false)} />
         )}
       </AnimatePresence>
     </section>
   );
-};
-
-export default Hero;
+}
 

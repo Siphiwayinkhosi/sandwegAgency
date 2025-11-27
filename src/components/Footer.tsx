@@ -1,20 +1,27 @@
 import React, { useState } from "react";
 import { Facebook, Instagram, Linkedin } from "lucide-react";
 import { motion, Variants } from "framer-motion";
+
 import DataProtection from "./DataProtection";
 import Imprint from "./Imprint";
+import Terms from "./Terms";
 import CookieBanner from "./CookieBanner";
 
 const Footer: React.FC = () => {
   const [showPolicy, setShowPolicy] = useState(false);
   const [showImprint, setShowImprint] = useState(false);
+  const [showTerms, setShowTerms] = useState(false);
 
   const containerVariants: Variants = {
     hidden: { opacity: 0, y: 40 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, when: "beforeChildren", staggerChildren: 0.2 },
+      transition: {
+        duration: 0.8,
+        when: "beforeChildren",
+        staggerChildren: 0.2,
+      },
     },
   };
 
@@ -40,6 +47,7 @@ const Footer: React.FC = () => {
 
   return (
     <>
+      {/* FOOTER */}
       <motion.footer
         className="relative w-full bg-black text-white py-10 overflow-hidden"
         initial="hidden"
@@ -47,31 +55,12 @@ const Footer: React.FC = () => {
         viewport={{ once: true, amount: 0.2 }}
         variants={containerVariants}
       >
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between relative">
-          {/* Logo + Text */}
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-4 text-center md:text-left md:relative md:top-4"
-          >
-            <img
-              src="/logo.png"
-              alt="Sandweg Logo"
-              className="max-w-[160px] md:max-w-[200px] h-auto object-contain"
-            />
-            <div className="flex flex-col items-center md:items-start mt-2 md:mt-0">
-              <h3 className="text-2xl text-white tracking-wide leading-none">
-                Sandweg
-              </h3>
-              <p className="text-base sm:text-lg text-white leading-none mt-1">
-                Branding & Marketing 
-              </p>
-            </div>
-          </motion.div>
+        <div className="max-w-7xl mx-auto px-6 flex flex-col items-center justify-center relative">
 
-          {/* Social Icons */}
+          {/* SOCIAL ICONS */}
           <motion.div
             variants={containerVariants}
-            className="flex justify-center md:justify-end gap-4 mt-6 md:mt-0 md:absolute md:right-10 md:top-[58%]"
+            className="w-full flex justify-center gap-6 mt-10"
           >
             {socialLinks.map(({ icon: Icon, href }, i) => (
               <motion.a
@@ -92,9 +81,10 @@ const Footer: React.FC = () => {
               </motion.a>
             ))}
           </motion.div>
+
         </div>
 
-        {/* Divider + Links */}
+        {/* DIVIDER & LINKS */}
         <motion.div
           variants={itemVariants}
           className="border-t border-gray-700 mt-10 pt-6 text-center text-base sm:text-lg text-gray-500 flex flex-col md:flex-row items-center justify-center gap-4"
@@ -114,17 +104,27 @@ const Footer: React.FC = () => {
           >
             Imprint
           </button>
+
+          <button
+            onClick={() => setShowTerms(true)}
+            className="text-gray-500 hover:text-orange-400 underline decoration-gray-500/40 underline-offset-4 transition"
+          >
+            Terms and Conditions
+          </button>
         </motion.div>
       </motion.footer>
 
-      {/* Modals */}
+      {/* MODALS */}
       <DataProtection open={showPolicy} onClose={() => setShowPolicy(false)} />
       <Imprint open={showImprint} onClose={() => setShowImprint(false)} />
-        {/* 👇 Cookie Banner */}
-<CookieBanner onPrivacyClick={() => setShowPolicy(true)} />
+      <Terms open={showTerms} onClose={() => setShowTerms(false)} />
+
+      {/* COOKIE BANNER */}
+      <CookieBanner onPrivacyClick={() => setShowPolicy(true)} />
     </>
   );
 };
 
 export default Footer;
+
 
