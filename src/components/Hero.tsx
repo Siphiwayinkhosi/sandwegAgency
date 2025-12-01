@@ -28,7 +28,7 @@ const CODE_LINES = [
   [
     { text: "  mission: ", className: "text-yellow-300" },
     {
-      text: `"Driven by communication, powered by AI — we build brands with digital marketing.",`,
+      text: `"Driven by communication, powered by technology — we build brands with digital marketing.",`,
       className: "text-white",
     },
   ],
@@ -110,7 +110,7 @@ const CODE_LINES = [
   ],
 
   [
-    { text: "  why: ", className: "text-yellow-300" },
+    { text: "  how: ", className: "text-yellow-300" },
     {
       text: `"We create AI-driven websites and tools with design at their core, so your dream can grow into a thriving business.",`,
       className: "text-white",
@@ -127,7 +127,7 @@ const CODE_LINES = [
   ],
 
   [
-    { text: "  challenge: ", className: "text-yellow-300" },
+    { text: "  solution: ", className: "text-yellow-300" },
     {
       text: `"We blend cutting-edge technology with creativity, AI that saves time, contemporary design, tools that make growth inevitable.",`,
       className: "text-white",
